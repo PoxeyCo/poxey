@@ -1,15 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "../views/Home/Home.vue";
+import Auth from "@/views/Auth/Auth";
+import MainLayout from "@/layouts/MainLayout/MainLayout";
+
+import store from "../store/store";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/auth",
+    name: "Auth",
+    component: Auth,
+  },
+  {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "MainLayout",
+    component: MainLayout,
+    meta: {
+      view: "Home",
+    },
   },
 ];
 
@@ -19,4 +30,10 @@ const router = new VueRouter({
   routes,
 });
 
+// router.beforeEach((to, from, next) => {
+//   if (store.state.isAuth) {
+//     return next();
+//   }
+//   return next({ path: "/auth" });
+// });
 export default router;
