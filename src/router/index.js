@@ -31,12 +31,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (store.state.isAuth || to.path === "/auth") {
-    console.log("Go");
-    next();
-  } else {
-    console.log("None");
-    next({ path: "/auth" });
-  }
+  if (store.state.isAuth || to.path === "/auth") next();
+  else next({ path: "/auth" });
 });
 export default router;
