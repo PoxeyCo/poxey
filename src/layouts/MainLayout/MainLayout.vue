@@ -26,7 +26,13 @@
     </aside>
     <div class="wrapper">
       <header class="header">
-        <div class="header-level">LEVEL</div>
+        <div class="header-level">
+          <p class="header-level__num from">5ур.</p>
+          <div class="header-level__bar">
+            <span class="progress"></span>
+          </div>
+          <p class="header-level__num to">6ур.</p>
+        </div>
         <div class="header-user">
           <div class="header-user__avatar">
             <img src="../../assets/images/header/avatar.png" alt="Your photo" />
@@ -35,7 +41,11 @@
             <p class="header-user__block-nickname">TankistPro</p>
             <p class="header-user__block-balance">Баланс: <span class="gold">7500</span></p>
           </div>
-          <div class="arrow">
+          <div 
+            class="arrow"
+            :class="{ open : openUserDropDown}"
+            @click="openUserDropDown = !openUserDropDown"
+          >
             <svg
               width="18"
               height="10"
@@ -71,5 +81,10 @@ export default {
   components: {
     Home,
   },
+  data() {
+    return {
+      openUserDropDown: false
+    }
+  }
 };
 </script>
