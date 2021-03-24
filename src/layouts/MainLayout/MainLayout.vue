@@ -39,11 +39,13 @@
           </div>
           <div class="header-user__block">
             <p class="header-user__block-nickname">TankistPro</p>
-            <p class="header-user__block-balance">Баланс: <span class="gold">7500</span></p>
+            <p class="header-user__block-balance">
+              Баланс: <span class="gold">7500</span>
+            </p>
           </div>
-          <div 
+          <div
             class="arrow"
-            :class="{ open : openUserDropDown}"
+            :class="{ open: openUserDropDown }"
             @click="openUserDropDown = !openUserDropDown"
           >
             <svg
@@ -58,6 +60,13 @@
                 fill="#2A767E"
               />
             </svg>
+          </div>
+          <div class="user__dropDown" :class="{ openMenu: openUserDropDown }">
+            <ul>
+              <li class="user__dropDown-item"><a href="#">Профиль</a></li>
+              <li class="user__dropDown-item"><a href="#">Инвентарь</a></li>
+              <li class="user__dropDown-item exit"><a href="#">Выйти</a></li>
+            </ul>
           </div>
         </div>
       </header>
@@ -83,8 +92,8 @@ export default {
   },
   data() {
     return {
-      openUserDropDown: false
-    }
-  }
+      openUserDropDown: false,
+    };
+  },
 };
 </script>
