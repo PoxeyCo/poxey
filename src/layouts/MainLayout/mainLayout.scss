@@ -36,6 +36,21 @@
               color: rgba(247, 167, 96, 1);
             }
           }
+
+          .active {
+            background-color: #FFFFFF;
+            color: rgba(247, 167, 96, 1);
+            position: relative;
+
+            &:before {
+              content: url("../../assets/images/header/nav-arrow.svg");
+              vertical-align: middle;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 16%;
+            }
+          }
         }
       }
     }

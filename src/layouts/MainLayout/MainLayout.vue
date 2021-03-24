@@ -7,7 +7,7 @@
       <nav class="nav">
         <ul class="nav-links">
           <li class="nav-links__item">
-            <router-link to="/">Главная</router-link>
+            <router-link to="/" class="active">Главная</router-link>
           </li>
           <li class="nav-links__item">
             <router-link to="#">Панель</router-link>
@@ -94,6 +94,21 @@ export default {
     return {
       openUserDropDown: false,
     };
+  },
+  mounted() {
+    const navLinks = document.querySelectorAll(".nav-links__item a");
+    const clearActive = (current) => {
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+      });
+      current.classList.add("active");
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        clearActive(link);
+      });
+    });
   },
 };
 </script>
