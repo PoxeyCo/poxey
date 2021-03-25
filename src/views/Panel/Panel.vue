@@ -1,8 +1,9 @@
 <template>
-  <p>Panel</p>
+  <div class="panel"></div>
 </template>
 
 <script>
+import "./panel.scss"
 export default {
   name: "Panel",
 };
