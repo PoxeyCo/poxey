@@ -1,20 +1,24 @@
 <template>
   <div class="auth">
-    <!-- <SignIn /> -->
-    <SignUp />
+    <component :is="component"></component>
   </div>
 </template>
 <script>
-import './auth.scss'
+import "./auth.scss";
 
-// import SignIn from '@/components/SignIn/SignIn'
-import SignUp from '@/components/SignUp/SignUp'
+import SignIn from "@/components/SignIn/SignIn";
+import SignUp from "@/components/SignUp/SignUp";
 
 export default {
-  name: 'Auth',
+  name: "Auth",
   components: {
-    // SignIn,
-    SignUp
+    SignIn,
+    SignUp,
+  },
+  computed: {
+    component() {
+      return this.$route.meta.component;
+    }
   }
 };
 </script>

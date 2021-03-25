@@ -22,7 +22,9 @@
         </div>
         <div class="SignIn__main__formSign__forgetPas">Забыли пароль!</div>
         <div class="SignIn__main__formSign__btn">ВОЙТИ</div>
-        <p class="SignIn__main__formSign__btnSignUp">Еще не аккаунта? <span>Зарегестрируйся!</span></p>
+        <p class="SignIn__main__formSign__btnSignUp">Еще не аккаунта? 
+          <router-link to="/registration">Зарегестрируйся!</router-link>
+        </p>
       </div>
       <!-- <div class="auth__main__formSign" id="SignUp">
         <div class="auth__main__formSign__title">Регистрация</div>

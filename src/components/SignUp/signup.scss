@@ -129,7 +129,8 @@
                 line-height: 16px;
                 color: #000000;
 
-                & span {
+                & a {
+                    text-decoration: none;
                     color: #FFFFFF;
                     cursor: pointer;
                 }

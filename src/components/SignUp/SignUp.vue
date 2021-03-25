@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="SignUp__main__formSign__btn">Зарегистрироваться</div>
-        <p class="SignUp__main__formSign__btnSignUp">Уже есть аккаунт? <span>Войти!</span></p>
+        <p class="SignUp__main__formSign__btnSignUp">Уже есть аккаунт? <router-link to="/auth">Войти!</router-link></p>
       </div>
       <img class="SignUp__main__poke" src="../../assets/images/auth/pokemon4.png" alt="">
     </div>

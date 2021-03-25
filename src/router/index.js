@@ -18,9 +18,20 @@ const routes = [
     },
   },
   {
+    path: "/registration",
+    name: "Registration",
+    component: Auth,
+    meta: {
+      component: "SignUp"
+    }
+  },
+  {
     path: "/auth",
     name: "Auth",
     component: Auth,
+    meta: {
+      component: "SignIn"
+    }
   },
   {
     path: "/panel",
@@ -39,7 +50,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (store.state.isAuth || to.path === "/auth") next();
+  if (store.state.isAuth || to.path === "/auth" || to.path === "/registration") next();
   else next({ path: "/auth" });
 });
 export default router;

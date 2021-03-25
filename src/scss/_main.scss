@@ -9,5 +9,11 @@ body {
 
     &::-webkit-scrollbar {
         width: 0;
+        display: none;
+    }
+
+    &::-moz-scrollbar
+    {
+        width: 0;
     }
 }
