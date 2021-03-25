@@ -1,0 +1,51 @@
+.daily-prize {
+  background: linear-gradient(0deg, #3DAEBA, #3DAEBA), #932EE2;
+  border: 3px solid #867070;
+  border-radius: 5px;
+  text-align: center;
+  width: 350px;
+  padding: 10px;
+
+  &__title {
+    text-shadow: 4px 3px 0px #9D8498;
+    color: #FFAC4A;
+    font-weight: 600;
+    font-size: 2.25rem;
+  }
+
+  &__timer {
+    color: #FFFFFF;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  &__count {
+    margin-top: 5px;
+    color: #FFBE08;
+    font-size: 1.625rem;
+    font-weight: bold;
+    -webkit-text-stroke: .04em black;
+
+    &::before {
+      content: attr(data-text);
+      position: absolute; /* в том же месте той же ширины */
+      left: 0;
+      right: 0;
+      -webkit-text-stroke: .02em gold;
+    }
+  }
+
+  &__btn {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    border: 2px solid #FFD00B;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #FFAC4A 0%, #FFAC4A 100%);
+    width: 235px;
+    height: 50px;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+}

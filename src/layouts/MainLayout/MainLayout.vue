@@ -10,7 +10,7 @@
             <router-link to="/" class="active">Главная</router-link>
           </li>
           <li class="nav-links__item">
-            <router-link to="#">Панель</router-link>
+            <router-link to="/panel">Панель</router-link>
           </li>
           <li class="nav-links__item">
             <router-link to="#">Арена</router-link>
@@ -79,6 +79,7 @@
 import "./mainLayout.scss";
 
 import Home from "@/views/Home/Home";
+import Panel from "@/views/Panel/Panel";
 
 export default {
   name: "MainLayout",
@@ -89,6 +90,7 @@ export default {
   },
   components: {
     Home,
+    Panel,
   },
   data() {
     return {

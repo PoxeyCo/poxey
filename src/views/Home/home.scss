@@ -1,4 +1,12 @@
-//.main {
-//  width: 100%;
-//  background: url("../../assets/images/Main/bg.png") top center /cover no-repeat;
-//}
+.main-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+  margin: 45px auto 0 auto;
+
+  .aside-home {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+  }
+}
