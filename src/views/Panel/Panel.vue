@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import "./panel.scss"
+import "./panel.scss";
 export default {
   name: "Panel",
 };

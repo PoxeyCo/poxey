@@ -1,0 +1,41 @@
+.live {
+  margin-top: 15px;
+
+  &-title {
+    color: #2A767E;
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  &-tape {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-wrapper {
+    display: flex;
+    margin-top: 10px;
+
+    &__item {
+      border-radius: 0 40px;
+      background: linear-gradient(180deg, #F28300 0%, #FFAC4A 46.88%, #3DAEBA 100%);
+      border: 3px solid #FFFFFF;
+      max-width: 156px;
+      max-height: 181px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+
+      &-title {
+        display: inline;
+        background: #F28300;
+        color: #FFFFFF;
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+    }
+  }
+}

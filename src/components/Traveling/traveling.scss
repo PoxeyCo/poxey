@@ -1,0 +1,117 @@
+.traveling {
+  width: 100%;
+  background: url("../../assets/images/traveling/bg.png") top left /cover no-repeat;
+  border-radius: 5px;
+  padding: 5px 0;
+  max-height: 625px;
+  height: 100%;
+  &__header {
+    color: #FFFFFF;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__st {
+    font-size: 1.875rem;
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 34px auto 0 auto;
+
+    &-chance, &-level {
+      background-color: #FFFFFF;
+      border-radius: 10px 0;
+      padding: 5px;
+    }
+
+    &-chance {
+      color: #EE0000;
+      font-weight: 600;
+    }
+
+    &-level {
+      font-weight: 600;
+    }
+  }
+
+  &-wrapper {
+    margin-top: 28px;
+
+    &__title {
+      text-transform: uppercase;
+      font-size: 1.875rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    &__slider {
+      max-height: 270px;
+      width: 100%;
+      height: 270px;
+      background-color: rgba(16, 179, 32, 0.5);
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+
+      .arrow-right, .arrow-left {
+        cursor: pointer;
+      }
+
+      .arrow-right {
+        transform: rotate(180deg);
+      }
+
+      &-tape {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        &__item {
+          cursor: pointer;
+
+          &.check {
+            border: 2px solid #FEA029;
+            border-radius: 10px;
+
+            .check-text {
+              text-align: center;
+              text-transform: uppercase;
+              color: #000000;
+              font-size: 1.5rem;
+              font-weight: 600;
+              background-color: #FEA029;
+              padding: 3px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-footer {
+    text-align: center;
+    margin-top: 58px;
+
+    button {
+      width: 232px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 1.875rem;
+      background-color: #FFCB06;
+      border-radius: 10px;
+      border: none;
+      padding: 10px 0 5px 0;
+
+      &:before {
+        content: url("../../assets/images/traveling/rout.svg");
+        vertical-align: middle;
+        margin-right: 14px;
+      }
+    }
+  }
+}
