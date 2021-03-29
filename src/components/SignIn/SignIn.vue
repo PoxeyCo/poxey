@@ -120,8 +120,6 @@ export default {
         this.$store.dispatch("signIn", response);
         this.$router.push("/");
         this.$store.state.isAith = true;
-        // console.log(this.$store.state.tokens)
-        // console.log(response)
       }
     }
   }
