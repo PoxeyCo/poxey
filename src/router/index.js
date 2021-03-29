@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import cookie from 'vue-cookies'
+import cookie from "vue-cookies";
 
 import store from "../store/store";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
@@ -51,17 +51,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const accessToken =
-    cookie.get("access_token") || store.state.tokens.accessToken;
+      cookie.get("access_token") || store.state.tokens.accessToken,
+    userId = cookie.get("user_id") || store.state.account.id;
 
-  // console.log(accessToken);
   if (accessToken) {
+    store.dispatch("authorization", userId);
     next();
-  } else if (
-    // store.state.isAuth ||
-    to.path === "/auth" ||
-    to.path === "/registration"
-  )
-    next();
+  } else if (to.path === "/auth" || to.path === "/registration") next();
   else next({ path: "/auth" });
 });
 export default router;

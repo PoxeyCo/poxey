@@ -28,6 +28,8 @@ export default new Vuex.Store({
       state.account.username = userData.username;
       state.account.avatarId = userData.avatarId;
       state.account.cash = userData.cash;
+
+      cookie.set("user_id", userData._id);
     },
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
@@ -41,6 +43,11 @@ export default new Vuex.Store({
     signIn(ctx, data) {
       ctx.commit("setAccountData", data["user"]);
       ctx.commit("setTokens", data["tokens"]);
+    },
+    authorization(ctx, userId) {
+      fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
+        .then((res) => res.json())
+        .then((data) => ctx.commit("setAccountData", data.user));
     },
   },
   modules: {},
