@@ -34,7 +34,6 @@ export default new Vuex.Store({
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
       state.tokens.refreshToken = tokens.refresh;
-
       cookie.set("access_token", tokens.access, "1d");
       cookie.set("refresh_token", tokens.refresh, "1d");
     },

@@ -15,7 +15,7 @@
           id="name"
         >
           <label>Ваш никнейм</label>
-          <label class="wrong">Ваш Никнейм занят</label>
+          <label class="wrong">{{ wrong }}</label>
           <div class="SignIn__main__formSign__form__input">
             <img src="../../assets/images/auth/internet.svg" alt="" />
             <input
@@ -31,7 +31,7 @@
           id="password"
         >
           <label>Ваш пароль</label>
-          <label class="wrong">Ваш Никнейм занят</label>
+          <label class="wrong">{{ wrong }}</label>
           <div class="SignIn__main__formSign__form__input">
             <img src="../../assets/images/auth/lock.svg" alt="" />
             <input
@@ -75,9 +75,10 @@ export default {
     return {
       wrong_login: false,
       wrong_password: false,
-      login: "",
-      password: "",
-    };
+      wrong: '',
+      login: '',
+      password: ''
+    }
   },
   methods: {
     eye(id) {
@@ -106,17 +107,54 @@ export default {
           },
         };
 
-        fetch(
-          "http://poxey.herokuapp.com/api/v1/accounts/signin",
-          requestParams
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            // this.checkServerResponse(data);
-          });
+      fetch(
+        "http://poxey.herokuapp.com/api/v1/accounts/signin",
+        requestParams
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          this.checkServerResponse(data);
+        });
       }
     },
-  },
+    checkServerResponse(response) {
+      const errors = {
+        1: "Ошибка с login",
+        2: "Ошибка с password",
+        3: "Аккаунта не существует",
+        4: "Неправильный пароль"
+      };
+      if (!response.status) {
+        response["errors"].forEach((key) => {
+          key = Number(key);
+          if (key === 1) {
+            this.wrong_login = true
+            this.wrong_password = false
+            this.wrong = errors['1']
+          }
+          if (key === 3) {
+            this.wrong_login = true
+            this.wrong_password = false
+            this.wrong = errors['3']
+          }
+          if (key === 2) {
+            this.wrong_password = true
+            this.wrong_login = false
+            this.wrong = errors['2']
+          }
+          if (key === 4) {
+            this.wrong_password = true
+            this.wrong_login = false
+            this.wrong = errors['4']
+          }
+        });
+      } else {
+        this.$store.dispatch("signIn", response);
+        this.$router.push("/");
+        // this.$store.state.isAith = true;
+      }
+    }
+  }
 };
 </script>
