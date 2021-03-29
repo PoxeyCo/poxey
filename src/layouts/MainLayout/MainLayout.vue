@@ -68,7 +68,7 @@
             <ul>
               <li class="user__dropDown-item"><a href="#">Профиль</a></li>
               <li class="user__dropDown-item"><a href="#">Инвентарь</a></li>
-              <li class="user__dropDown-item exit"><a href="#">Выйти</a></li>
+              <li class="user__dropDown-item exit"><p @click="$store.dispatch('logout')">Выйти</p></li>
             </ul>
           </div>
         </div>

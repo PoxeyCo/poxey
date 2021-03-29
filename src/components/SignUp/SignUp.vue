@@ -156,7 +156,6 @@ export default {
       }
     },
     check_name() {
-      console.log("check");
       this.wrong_name =
         this.username.length < 4 ||
         this.username.length > 15 ||
@@ -216,7 +215,6 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
           this.checkServerResponse(data);
         });
     },

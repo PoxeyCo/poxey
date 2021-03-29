@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import cookie from "vue-cookies";
+import router from "@/router";
 
 Vue.use(Vuex);
 
@@ -34,8 +35,22 @@ export default new Vuex.Store({
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
       state.tokens.refreshToken = tokens.refresh;
+
       cookie.set("access_token", tokens.access, "1d");
       cookie.set("refresh_token", tokens.refresh, "1d");
+    },
+    removeTokens(state) {
+      state.tokens.accessToken = "";
+      state.tokens.refreshToken = "";
+
+      cookie.remove("access_token");
+      cookie.remove("refresh_token");
+    },
+    removeAccountData(state) {
+      state.isAuth = false;
+      state.account = {};
+
+      cookie.remove("user_id");
     },
   },
   actions: {
@@ -47,6 +62,12 @@ export default new Vuex.Store({
       fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
+    },
+    logout(ctx) {
+      ctx.commit("removeTokens");
+      ctx.commit("removeAccountData");
+
+      router.push("/auth");
     },
   },
   modules: {},
