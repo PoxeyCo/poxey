@@ -152,7 +152,7 @@ export default {
       } else {
         this.$store.dispatch("signIn", response);
         this.$router.push("/");
-        this.$store.state.isAith = true;
+        // this.$store.state.isAith = true;
       }
     }
   }
