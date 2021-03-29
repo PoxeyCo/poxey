@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
-import MainLayout from "@/layouts/MainLayout/MainLayout";
-import Auth from "@/views/Auth/Auth";
+import cookie from 'vue-cookies'
 
 import store from "../store/store";
+import MainLayout from "@/layouts/MainLayout/MainLayout";
+import Auth from "@/views/Auth/Auth";
 
 Vue.use(VueRouter);
 
@@ -50,7 +50,17 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (store.state.isAuth || to.path === "/auth" || to.path === "/registration")
+  const accessToken =
+    cookie.get("access_token") || store.state.tokens.accessToken;
+
+  // console.log(accessToken);
+  if (accessToken) {
+    next();
+  } else if (
+    // store.state.isAuth ||
+    to.path === "/auth" ||
+    to.path === "/registration"
+  )
     next();
   else next({ path: "/auth" });
 });
