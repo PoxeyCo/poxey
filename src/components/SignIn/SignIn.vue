@@ -7,7 +7,7 @@
         <div class="SignIn__main__formSign__title">Авторизация</div>
         <div class="SignIn__main__formSign__form" :class="{ wrong: wrong_login }" id="name">
           <label>Ваш никнейм</label>
-          <label class="wrong">Ваш Никнейм занят</label>
+          <label class="wrong">{{ wrong }}</label>
           <div class="SignIn__main__formSign__form__input">
             <img src="../../assets/images/auth/internet.svg" alt="">
             <input type="text" placeholder="Введите ваш никнейм или почту" v-model="login">
@@ -15,7 +15,7 @@
         </div>
         <div class="SignIn__main__formSign__form last-form" :class="{ wrong: wrong_password }" id="password">
           <label>Ваш пароль</label>
-          <label class="wrong">Ваш Никнейм занят</label>
+          <label class="wrong">{{ wrong }}</label>
           <div class="SignIn__main__formSign__form__input">
             <img src="../../assets/images/auth/lock.svg" alt="">
             <input type="password" placeholder="Введите ваш пароль" v-model="password">
@@ -42,6 +42,7 @@ export default {
     return {
       wrong_login: false,
       wrong_password: false,
+      wrong: '',
       login: '',
       password: ''
     }
@@ -79,9 +80,48 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          // this.checkServerResponse(data);
+          // console.log(data);
+          this.checkServerResponse(data);
         });
+      }
+    },
+    checkServerResponse(response) {
+      const errors = {
+        1: "Ошибка с login",
+        2: "Ошибка с password",
+        3: "Аккаунта не существует",
+        4: "Неправильный пароль"
+      };
+      if (!response.status) {
+        response["errors"].forEach((key) => {
+          key = Number(key);
+          if (key === 1) {
+            this.wrong_login = true
+            this.wrong_password = false
+            this.wrong = errors['1']
+          }
+          if (key === 3) {
+            this.wrong_login = true
+            this.wrong_password = false
+            this.wrong = errors['3']
+          }
+          if (key === 2) {
+            this.wrong_password = true
+            this.wrong_login = false
+            this.wrong = errors['2']
+          }
+          if (key === 4) {
+            this.wrong_password = true
+            this.wrong_login = false
+            this.wrong = errors['4']
+          }
+        });
+      } else {
+        this.$store.dispatch("signIn", response);
+        this.$router.push("/");
+        this.$store.state.isAith = true;
+        // console.log(this.$store.state.tokens)
+        // console.log(response)
       }
     }
   }

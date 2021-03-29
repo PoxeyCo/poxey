@@ -30,8 +30,8 @@ export default new Vuex.Store({
       state.account.cash = userData.cash;
     },
     setTokens(state, tokens) {
-      state.tokens.accessToken = tokens.accessToken;
-      state.tokens.refreshToken = tokens.refreshToken;
+      state.tokens.accessToken = tokens.access;
+      state.tokens.refreshToken = tokens.refresh;
     },
   },
   actions: {
