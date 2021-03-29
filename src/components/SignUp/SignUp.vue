@@ -149,10 +149,10 @@ export default {
       let input = eye.parentElement.querySelector("input");
       if (eye.src.includes("close-eye")) {
         input.type = "text";
-        eye.src = require('@/assets/images/auth/open-eye.svg')
+        eye.src = require("@/assets/images/auth/open-eye.svg");
       } else {
         input.type = "password";
-        eye.src = require('@/assets/images/auth/close-eye.svg')
+        eye.src = require("@/assets/images/auth/close-eye.svg");
       }
     },
     check_name() {

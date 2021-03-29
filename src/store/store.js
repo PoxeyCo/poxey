@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import cookie from "vue-cookies";
 
 Vue.use(Vuex);
 
@@ -20,8 +21,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setAccountData(state, userData) {
-      this.isAuth = true;
-      console.log(userData);
+      state.isAuth = true;
 
       state.account.id = userData._id;
       state.account.email = userData.email;
@@ -30,8 +30,11 @@ export default new Vuex.Store({
       state.account.cash = userData.cash;
     },
     setTokens(state, tokens) {
-      state.tokens.accessToken = tokens.accessToken;
-      state.tokens.refreshToken = tokens.refreshToken;
+      state.tokens.accessToken = tokens.access;
+      state.tokens.refreshToken = tokens.refresh;
+
+      cookie.set("access_token", tokens.access, "1d");
+      cookie.set("refresh_token", tokens.refresh, "1d");
     },
   },
   actions: {

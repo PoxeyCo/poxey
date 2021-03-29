@@ -38,9 +38,12 @@
             <img src="../../assets/images/header/avatar.png" alt="Your photo" />
           </div>
           <div class="header-user__block">
-            <p class="header-user__block-nickname">TankistPro</p>
+            <p class="header-user__block-nickname">
+              {{ this.$store.state.account.username }}
+            </p>
             <p class="header-user__block-balance">
-              Баланс: <span class="gold">7500</span>
+              Баланс:
+              <span class="gold">{{ this.$store.state.account.cash }}</span>
             </p>
           </div>
           <div
