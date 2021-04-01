@@ -14,10 +14,19 @@ export default new Vuex.Store({
       username: "",
       avatarId: "",
       cash: "",
+      level: 0,
+      expToNextLevel: 0,
+      experience: 0,
+    },
+    character: {
+      power: 0,
+      pokemons: [],
+      items: [],
+      selectedItems: {},
     },
     tokens: {
-      accessToken: "",
-      refreshToken: "",
+      accessToken: "" || cookie.get("access_token"),
+      refreshToken: "" || cookie.get("refresh_token"),
     },
   },
   mutations: {
@@ -29,8 +38,18 @@ export default new Vuex.Store({
       state.account.username = userData.username;
       state.account.avatarId = userData.avatarId;
       state.account.cash = userData.cash;
+      state.account.level = userData.level;
+      state.account.expToNextLevel = userData.expToNextLevel;
+      state.account.experience = userData.experience;
 
       cookie.set("user_id", userData._id);
+    },
+    setAccountProgress(state, progressData) {
+      console.log(progressData);
+      state.character.power = progressData.character.power;
+      state.character.pokemons = progressData.character.pokemons;
+      state.character.items = progressData.character.items;
+      state.character.selectedItems = progressData.character.selectedItems;
     },
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
@@ -59,9 +78,22 @@ export default new Vuex.Store({
       ctx.commit("setTokens", data.tokens);
     },
     authorization(ctx, userId) {
+      const requestCharacters = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${cookie.get("access_token")}`,
+        },
+      };
+
       fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
+
+      fetch("http://poxey.herokuapp.com/api/v1/characters/", requestCharacters)
+        .then((res) => res.json())
+        .then((data) => {
+          ctx.commit("setAccountProgress", data);
+        });
     },
     logout(ctx) {
       ctx.commit("removeTokens");

@@ -27,11 +27,15 @@
     <div class="wrapper">
       <header class="header">
         <div class="header-level">
-          <p class="header-level__num from">5ур.</p>
+          <p class="header-level__num from">
+            {{ $store.state.account.level }} ур.
+          </p>
           <div class="header-level__bar">
             <span class="progress"></span>
           </div>
-          <p class="header-level__num to">6ур.</p>
+          <p class="header-level__num to">
+            {{ $store.state.account.level + 1 }} ур.
+          </p>
         </div>
         <div class="header-user">
           <div class="header-user__avatar">
@@ -102,6 +106,13 @@ export default {
   },
   mounted() {
     const navLinks = document.querySelectorAll(".nav-links__item a");
+
+    const progressBar = document.querySelector(".progress");
+    const widthProgressBar = document.querySelector(".header-level__bar").clientWidth;
+    const exp = widthProgressBar / this.$store.state.account.expToNextLevel;
+
+    progressBar.style.width = `${exp * this.$store.state.account.experience}px`;
+
     const clearActive = (current) => {
       navLinks.forEach((link) => {
         link.classList.remove("active");

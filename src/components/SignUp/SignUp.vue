@@ -169,7 +169,7 @@ export default {
       const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       this.wrong_email = !emailRegExp.test(String(this.email));
     },
-    checkServerResponse(response) {
+    async checkServerResponse(response) {
       const errors = {
         1: "Неккоректный Email",
         2: "Неккоректный Username",
@@ -178,7 +178,7 @@ export default {
         5: "Username занят",
       };
       if (!response.status) {
-        response["errors"].forEach((key) => {
+        for (let key of response["errors"]) {
           key = Number(key);
           if (key === 5 || key === 2) {
             this.errors.username.show = true;
@@ -192,8 +192,20 @@ export default {
             this.errors.password.show = true;
             this.errors.password.message = errors[key];
           }
-        });
+        }
       } else {
+        const requestCharacters = {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${response.tokens.access}`,
+          },
+        };
+
+        await fetch(
+          "http://poxey.herokuapp.com/api/v1/characters/",
+          requestCharacters
+        );
+
         this.$store.dispatch("signIn", response);
         this.$router.push("/");
       }
