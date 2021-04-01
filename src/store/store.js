@@ -55,8 +55,8 @@ export default new Vuex.Store({
   },
   actions: {
     signIn(ctx, data) {
-      ctx.commit("setAccountData", data["user"]);
-      ctx.commit("setTokens", data["tokens"]);
+      ctx.commit("setAccountData", data.user);
+      ctx.commit("setTokens", data.tokens);
     },
     authorization(ctx, userId) {
       fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)

@@ -28,6 +28,7 @@
               placeholder="Введите ваш никнейм"
               v-model="username"
               @change="check_name"
+              @keyup.enter="registration"
             />
           </div>
         </div>
@@ -47,6 +48,7 @@
               placeholder="Введите вашу почту"
               v-model="email"
               @change="check_email"
+              @keyup.enter="registration"
             />
           </div>
         </div>
@@ -67,6 +69,7 @@
               type="password"
               placeholder="Введите ваш пароль"
               v-model="password1"
+              @keyup.enter="registration"
             />
             <img
               class="SignUp__main__formSign__form__input__eye"
@@ -86,6 +89,7 @@
               placeholder="Введите ваш пароль"
               v-model="password2"
               @input="checkPassword"
+              @keyup.enter="registration"
             />
             <img
               class="SignUp__main__formSign__form__input__eye"

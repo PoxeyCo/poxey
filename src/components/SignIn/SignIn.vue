@@ -22,6 +22,7 @@
               type="text"
               placeholder="Введите ваш никнейм или почту"
               v-model="login"
+              @keyup.enter="authorization"
             />
           </div>
         </div>
@@ -38,6 +39,7 @@
               type="password"
               placeholder="Введите ваш пароль"
               v-model="password"
+              @keyup.enter="authorization"
             />
             <img
               class="SignIn__main__formSign__form__input__eye"
@@ -49,7 +51,10 @@
           </div>
         </div>
         <div class="SignIn__main__formSign__forgetPas">Забыли пароль!</div>
-        <div class="SignIn__main__formSign__btn" @click="authorization">
+        <div
+          class="SignIn__main__formSign__btn"
+          @click="authorization"
+        >
           ВОЙТИ
         </div>
         <p class="SignIn__main__formSign__btnSignUp">
