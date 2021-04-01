@@ -2,16 +2,49 @@
   display: flex;
   justify-content: space-between;
   width: 95%;
+  //height: 100%;
   margin: 45px auto 0 auto;
 
   .aside-home {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     max-width: 350px;
+    width: 100%;
   }
 
   .content {
     max-width: 1130px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
+
+@media screen and (max-width: 1860px){
+  .main-wrapper .content {
+    max-width: 70%;
+  }
+}
+@media screen and (max-width: 1670px){
+  .main .aside {
+    max-width: 255px;
+  }
+  .main .wrapper {
+    width: calc(100% - 255px);
+  }
+}
+
+@media screen and (max-width: 1600px){
+  .main-wrapper .content {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 1530px){
+  .main-wrapper .content {
+    max-width: 68%;
+  }
+}
+
