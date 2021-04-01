@@ -16,23 +16,27 @@
       <div class="traveling-wrapper__slider">
         <img
           class="arrow-left"
+          data-side="left"
           src="../../assets/images/traveling/arrow.svg"
           alt="Arrow-left"
         />
         <div class="traveling-wrapper__slider-tape">
-          <div class="traveling-wrapper__slider-tape__item">
-            <img src="../../assets/images/traveling/Herdier.png" alt="" />
-          </div>
-          <div class="traveling-wrapper__slider-tape__item check">
-            <img src="../../assets/images/traveling/Gengar.png" alt="" />
-            <p class="check-text">Выбран</p>
-          </div>
-          <div class="traveling-wrapper__slider-tape__item">
-            <img src="../../assets/images/traveling/Herdier.png" alt="" />
+          <div class="slider-lenta">
+            <div class="traveling-wrapper__slider-tape__item">
+              <img src="../../assets/images/traveling/Herdier.png" alt="" />
+            </div>
+            <div class="traveling-wrapper__slider-tape__item check">
+              <img src="../../assets/images/traveling/Gengar.png" alt="" />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img src="../../assets/images/traveling/Herdier.png" alt="" />
+            </div>
           </div>
         </div>
         <img
           class="arrow-right"
+          data-side="right"
           src="../../assets/images/traveling/arrow.svg"
           alt="Arrow-right"
         />
@@ -46,7 +50,12 @@
 
 <script>
 import "./traveling.scss";
+import slider from "@/utils/travalingSlider";
+
 export default {
   name: "Traveling",
+  mounted() {
+    slider()
+  }
 };
 </script>

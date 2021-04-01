@@ -42,7 +42,7 @@ export default new Vuex.Store({
       state.account.expToNextLevel = userData.expToNextLevel;
       state.account.experience = userData.experience;
 
-      cookie.set("user_id", userData._id);
+      cookie.set("user_id", userData._id, { httponly: true });
     },
     setAccountProgress(state, progressData) {
       console.log(progressData);
@@ -54,9 +54,9 @@ export default new Vuex.Store({
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
       state.tokens.refreshToken = tokens.refresh;
-
-      cookie.set("access_token", tokens.access, "1d");
-      cookie.set("refresh_token", tokens.refresh, "1d");
+      
+      cookie.set("access_token", tokens.access, "1d", { httponly: true });
+      cookie.set("refresh_token", tokens.refresh, "1d", { httponly: true });
     },
     removeTokens(state) {
       state.tokens.accessToken = "";
