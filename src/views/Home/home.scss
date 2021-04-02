@@ -34,6 +34,9 @@
   .main .wrapper {
     width: calc(100% - 255px);
   }
+  .main .aside .nav-links__item .active:before {
+    left: 8%;
+  }
 }
 
 @media screen and (max-width: 1600px){

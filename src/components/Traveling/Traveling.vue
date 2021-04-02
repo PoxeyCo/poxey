@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="traveling-wrapper">
-      <p class="traveling-wrapper__title">Выбери своих покемонов:</p>
+      <p class="traveling-wrapper__title">Выбери 3-x покемонов:</p>
       <div class="traveling-wrapper__slider">
         <img
           class="arrow-left"
@@ -22,15 +22,80 @@
         />
         <div class="traveling-wrapper__slider-tape">
           <div class="slider-lenta">
-            <div class="traveling-wrapper__slider-tape__item">
-              <img src="../../assets/images/traveling/Herdier.png" alt="" />
-            </div>
-            <div class="traveling-wrapper__slider-tape__item check">
-              <img src="../../assets/images/traveling/Gengar.png" alt="" />
+            <div
+              class="traveling-wrapper__slider-tape__item"
+              @click="selectPokemon"
+            >
+              <img
+                src="../../assets/images/traveling/Herdier.png"
+                @click="selectPokemon"
+                alt=""
+              />
               <p class="check-text">Выбран</p>
             </div>
             <div class="traveling-wrapper__slider-tape__item">
-              <img src="../../assets/images/traveling/Herdier.png" alt="" />
+              <img
+                src="../../assets/images/traveling/Gengar.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Herdier.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Gengar.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Herdier.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Gengar.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Gengar.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Herdier.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
+            </div>
+            <div class="traveling-wrapper__slider-tape__item">
+              <img
+                src="../../assets/images/traveling/Gengar.png"
+                @click="selectPokemon"
+                alt=""
+              />
+              <p class="check-text">Выбран</p>
             </div>
           </div>
         </div>
@@ -54,8 +119,16 @@ import slider from "@/utils/travalingSlider";
 
 export default {
   name: "Traveling",
+  methods: {
+    selectPokemon(event) {
+      const target = event.target.closest(
+        ".traveling-wrapper__slider-tape__item"
+      );
+      target.classList.add("check");
+    },
+  },
   mounted() {
-    slider()
-  }
+    slider();
+  },
 };
 </script>

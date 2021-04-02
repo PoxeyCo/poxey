@@ -107,12 +107,6 @@ export default {
   mounted() {
     const navLinks = document.querySelectorAll(".nav-links__item a");
 
-    const progressBar = document.querySelector(".progress");
-    const widthProgressBar = document.querySelector(".header-level__bar").clientWidth;
-    const exp = widthProgressBar / this.$store.state.account.expToNextLevel;
-
-    progressBar.style.width = `${exp * this.$store.state.account.experience}px`;
-
     const clearActive = (current) => {
       navLinks.forEach((link) => {
         link.classList.remove("active");
