@@ -121,7 +121,6 @@ export default {
         clearActive(link);
       });
     });
-    document.querySelector('#avatar').src = require(`@/assets/images/avatar/${this.$store.state.account.avatarId}.png`);
   },
 };
 </script>
