@@ -119,6 +119,9 @@ import slider from "@/utils/travalingSlider";
 
 export default {
   name: "Traveling",
+  data() {
+    return {}
+  },
   methods: {
     selectPokemon(event) {
       const target = event.target.closest(

@@ -8,9 +8,6 @@ module.exports = function slider() {
   const sliderLength = document.querySelectorAll(".traveling-wrapper__slider-tape__item").length
   let count = 0;
 
-  console.log("Ready")
-
-
   const hideArrow = () => {
     if (count + 1 == sliderLength) {
       arrowRight.style.opacity = "0";

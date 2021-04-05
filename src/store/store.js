@@ -77,7 +77,7 @@ export default new Vuex.Store({
       ctx.commit("setAccountData", data.user);
       ctx.commit("setTokens", data.tokens);
     },
-    authorization(ctx, userId) {
+    async authorization(ctx, userId) {
       const requestCharacters = {
         method: "GET",
         headers: {
@@ -85,11 +85,11 @@ export default new Vuex.Store({
         },
       };
 
-      fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
+      await fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
 
-      fetch("http://poxey.herokuapp.com/api/v1/characters/", requestCharacters)
+      await fetch("http://poxey.herokuapp.com/api/v1/characters/", requestCharacters)
         .then((res) => res.json())
         .then((data) => {
           ctx.commit("setAccountProgress", data);

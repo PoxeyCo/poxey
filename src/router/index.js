@@ -57,14 +57,14 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const accessToken =
       cookie.get("access_token") || store.state.tokens.accessToken,
     userId = cookie.get("user_id") || store.state.account.id;
 
   if (accessToken) {
-    store.dispatch("authorization", userId);
-    next();
+    await store.dispatch("authorization", userId);
+    next()
   } else if (to.path === "/auth" || to.path === "/registration") next();
   else next({ path: "/auth" });
 });

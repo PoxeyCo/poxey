@@ -39,7 +39,7 @@
         </div>
         <div class="header-user">
           <div class="header-user__avatar">
-            <img alt="Your photo" id="avatar"/>
+            <img :src="require(`@/assets/images/avatar/${$store.state.account.avatarId}.png`)"  alt="Your photo"/>
           </div>
           <div class="header-user__block">
             <p class="header-user__block-nickname">
@@ -71,7 +71,7 @@
           <div class="user__dropDown" :class="{ openMenu: openUserDropDown }">
             <ul>
               <li class="user__dropDown-item"><a href="#">Профиль</a></li>
-              <li class="user__dropDown-item"><a href="#">Инвентарь</a></li>
+              <li class="user__dropDown-item"><router-link to="/inventory">Инвентарь</router-link></li>
               <li class="user__dropDown-item exit"><p @click="$store.dispatch('logout')">Выйти</p></li>
             </ul>
           </div>
@@ -121,7 +121,7 @@ export default {
         clearActive(link);
       });
     });
-    document.querySelector('#avatar').src = require(`@/assets/images/avatar/${this.$store.state.account.avatarId}.png`);
+    // document.querySelector('#avatar').src = require(`@/assets/images/avatar/${this.$store.state.account.avatarId}.png`);
   },
 };
 </script>
