@@ -39,7 +39,7 @@
         </div>
         <div class="header-user">
           <div class="header-user__avatar">
-            <img src="../../assets/images/header/avatar.png" alt="Your photo" />
+            <img alt="Your photo" id="avatar"/>
           </div>
           <div class="header-user__block">
             <p class="header-user__block-nickname">
@@ -103,7 +103,7 @@ export default {
   },
   data() {
     return {
-      openUserDropDown: false,
+      openUserDropDown: false
     };
   },
   mounted() {
@@ -121,6 +121,7 @@ export default {
         clearActive(link);
       });
     });
+    document.querySelector('#avatar').src = require(`@/assets/images/avatar/${this.$store.state.account.avatarId}.png`);
   },
 };
 </script>
