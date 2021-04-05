@@ -83,6 +83,7 @@ import "./mainLayout.scss";
 
 import Home from "@/views/Home/Home";
 import Panel from "@/views/Panel/Panel";
+import Inventory from "@/views/Inventory/Inventory";
 
 export default {
   name: "MainLayout",
@@ -94,6 +95,7 @@ export default {
   components: {
     Home,
     Panel,
+    Inventory
   },
   data() {
     return {

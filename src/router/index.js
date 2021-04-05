@@ -41,6 +41,14 @@ const routes = [
       view: "Panel",
     },
   },
+  {
+    path: "/inventory",
+    name: "Inventory",
+    component: MainLayout,
+    meta: {
+      view: "Inventory",
+    },
+  }
 ];
 
 const router = new VueRouter({

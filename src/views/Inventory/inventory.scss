@@ -1,0 +1,46 @@
+.inventory {
+  margin-top: 38px;
+  margin: 0 auto;
+
+  &__equipmentItems {
+    display: flex;
+    width: 95%;
+    justify-content: space-around;
+    align-items: center;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__block {
+        width: 228px;
+        height: 228px;
+        border: 5px #fff solid;
+        border-radius: 5px;
+        background: linear-gradient(134.86deg, #2D87B9 2.7%, #48C933 96.83%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      & p {
+        margin-top: 15px;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
+
+        color: #000000;
+      }
+    }
+  }
+
+  &__listOfMatters {
+    width: 95%;
+    &__header {width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+}
