@@ -48,7 +48,7 @@ const routes = [
     meta: {
       view: "Inventory",
     },
-  }
+  },
 ];
 
 const router = new VueRouter({
@@ -64,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (accessToken) {
     await store.dispatch("authorization", userId);
-    next()
+    next();
   } else if (to.path === "/auth" || to.path === "/registration") next();
   else next({ path: "/auth" });
 });

@@ -39,7 +39,12 @@
         </div>
         <div class="header-user">
           <div class="header-user__avatar">
-            <img :src="require(`@/assets/images/avatar/${$store.state.account.avatarId}.png`)"  alt="Your photo"/>
+            <img
+              :src="
+                require(`@/assets/images/avatar/${$store.state.account.avatarId}.png`)
+              "
+              alt="Your photo"
+            />
           </div>
           <div class="header-user__block">
             <p class="header-user__block-nickname">
@@ -71,8 +76,12 @@
           <div class="user__dropDown" :class="{ openMenu: openUserDropDown }">
             <ul>
               <li class="user__dropDown-item"><a href="#">Профиль</a></li>
-              <li class="user__dropDown-item"><a href="#">Инвентарь</a></li>
-              <li class="user__dropDown-item exit"><p @click="$store.dispatch('logout')">Выйти</p></li>
+              <li class="user__dropDown-item">
+                <router-link to="/inventory">Инвентарь</router-link>
+              </li>
+              <li class="user__dropDown-item exit">
+                <p @click="$store.dispatch('logout')">Выйти</p>
+              </li>
             </ul>
           </div>
         </div>
@@ -99,15 +108,20 @@ export default {
   components: {
     Home,
     Panel,
-    Inventory
+    Inventory,
   },
   data() {
     return {
-      openUserDropDown: false
+      openUserDropDown: false,
     };
   },
   mounted() {
     const navLinks = document.querySelectorAll(".nav-links__item a");
+    const userDropMenuLinks = document.querySelectorAll(".user__dropDown-item");
+
+    userDropMenuLinks.forEach((link) => {
+      link.addEventListener("click", () => (this.openUserDropDown = false));
+    });
 
     const clearActive = (current) => {
       navLinks.forEach((link) => {
