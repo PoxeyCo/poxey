@@ -1,10 +1,10 @@
 .inventory {
-  margin-top: 38px;
   margin: 0 auto;
+  margin-top: 38px;
+  width: 95%;
 
   &__equipmentItems {
     display: flex;
-    width: 95%;
     justify-content: space-around;
     align-items: center;
 
@@ -36,11 +36,73 @@
   }
 
   &__listOfMatters {
-    width: 95%;
-    &__header {width: 100%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+
+    &__header {
+      width: 100%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
+
+      &__name {
+        background: #178342;
+        border-radius: 5px 5px 0px 0px;
+        width: 407px;
+        height: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 56px;
+        text-transform: uppercase;
+
+        color: #FFFFFF;
+      }
+
+      &__search {
+        width: 399px;
+        height: 47px;
+        background: #FFFFFF;
+        border: 2px solid #1F9950;
+        box-sizing: border-box;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px 0 24px;
+
+        & input {
+          outline: none;
+          border: none;
+          background: none;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 21px;
+          text-transform: uppercase;
+          color: #000000;
+          width: 80%;
+        }
+
+        & img {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__main {
+      width: 100%;
+      height: 539px;
+      background: #1F9950;
+      border-radius: 0px 5px 5px 5px;
+      overflow-y: scroll;
+      padding: 22px 77px;
+
+      &__matter {
+        height: 1000px;
+      }
     }
   }
 }

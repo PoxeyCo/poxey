@@ -248,3 +248,9 @@
     }
   }
 }
+
+@media screen and (max-height: 1052px) {
+  .main .wrapper {
+    height: 100%;
+  }
+}
