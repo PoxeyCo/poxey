@@ -207,7 +207,8 @@
           }
 
           &-item {
-            a {
+            a,p {
+              cursor: pointer;
               text-align: center;
               padding: 8px 20px;
               color: #000000;
@@ -226,7 +227,7 @@
 
             &.exit {
               border-top: 1px solid #000000;
-              a {
+              p {
                 text-align: right;
 
                 &:before {

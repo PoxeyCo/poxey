@@ -28,6 +28,7 @@
               placeholder="Введите ваш никнейм"
               v-model="username"
               @change="check_name"
+              @keyup.enter="registration"
             />
           </div>
         </div>
@@ -47,6 +48,7 @@
               placeholder="Введите вашу почту"
               v-model="email"
               @change="check_email"
+              @keyup.enter="registration"
             />
           </div>
         </div>
@@ -67,6 +69,7 @@
               type="password"
               placeholder="Введите ваш пароль"
               v-model="password1"
+              @keyup.enter="registration"
             />
             <img
               class="SignUp__main__formSign__form__input__eye"
@@ -86,6 +89,7 @@
               placeholder="Введите ваш пароль"
               v-model="password2"
               @input="checkPassword"
+              @keyup.enter="registration"
             />
             <img
               class="SignUp__main__formSign__form__input__eye"
@@ -156,7 +160,6 @@ export default {
       }
     },
     check_name() {
-      console.log("check");
       this.wrong_name =
         this.username.length < 4 ||
         this.username.length > 15 ||
@@ -166,7 +169,7 @@ export default {
       const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       this.wrong_email = !emailRegExp.test(String(this.email));
     },
-    checkServerResponse(response) {
+    async checkServerResponse(response) {
       const errors = {
         1: "Неккоректный Email",
         2: "Неккоректный Username",
@@ -175,7 +178,7 @@ export default {
         5: "Username занят",
       };
       if (!response.status) {
-        response["errors"].forEach((key) => {
+        for (let key of response["errors"]) {
           key = Number(key);
           if (key === 5 || key === 2) {
             this.errors.username.show = true;
@@ -189,8 +192,20 @@ export default {
             this.errors.password.show = true;
             this.errors.password.message = errors[key];
           }
-        });
+        }
       } else {
+        const requestCharacters = {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${response.tokens.access}`,
+          },
+        };
+
+        await fetch(
+          "http://poxey.herokuapp.com/api/v1/characters/",
+          requestCharacters
+        );
+
         this.$store.dispatch("signIn", response);
         this.$router.push("/");
       }
@@ -216,7 +231,6 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
           this.checkServerResponse(data);
         });
     },

@@ -22,6 +22,7 @@
               type="text"
               placeholder="Введите ваш никнейм или почту"
               v-model="login"
+              @keyup.enter="authorization"
             />
           </div>
         </div>
@@ -38,6 +39,7 @@
               type="password"
               placeholder="Введите ваш пароль"
               v-model="password"
+              @keyup.enter="authorization"
             />
             <img
               class="SignIn__main__formSign__form__input__eye"
@@ -49,7 +51,10 @@
           </div>
         </div>
         <div class="SignIn__main__formSign__forgetPas">Забыли пароль!</div>
-        <div class="SignIn__main__formSign__btn" @click="authorization">
+        <div
+          class="SignIn__main__formSign__btn"
+          @click="authorization"
+        >
           ВОЙТИ
         </div>
         <p class="SignIn__main__formSign__btnSignUp">
@@ -75,10 +80,10 @@ export default {
     return {
       wrong_login: false,
       wrong_password: false,
-      wrong: '',
-      login: '',
-      password: ''
-    }
+      wrong: "",
+      login: "",
+      password: "",
+    };
   },
   methods: {
     eye(id) {
@@ -107,15 +112,15 @@ export default {
           },
         };
 
-      fetch(
-        "http://poxey.herokuapp.com/api/v1/accounts/signin",
-        requestParams
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          this.checkServerResponse(data);
-        });
+        fetch(
+          "http://poxey.herokuapp.com/api/v1/accounts/signin",
+          requestParams
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            this.checkServerResponse(data);
+          });
       }
     },
     checkServerResponse(response) {
@@ -123,37 +128,37 @@ export default {
         1: "Ошибка с login",
         2: "Ошибка с password",
         3: "Аккаунта не существует",
-        4: "Неправильный пароль"
+        4: "Неправильный пароль",
       };
       if (!response.status) {
         response["errors"].forEach((key) => {
           key = Number(key);
           if (key === 1) {
-            this.wrong_login = true
-            this.wrong_password = false
-            this.wrong = errors['1']
+            this.wrong_login = true;
+            this.wrong_password = false;
+            this.wrong = errors["1"];
           }
           if (key === 3) {
-            this.wrong_login = true
-            this.wrong_password = false
-            this.wrong = errors['3']
+            this.wrong_login = true;
+            this.wrong_password = false;
+            this.wrong = errors["3"];
           }
           if (key === 2) {
-            this.wrong_password = true
-            this.wrong_login = false
-            this.wrong = errors['2']
+            this.wrong_password = true;
+            this.wrong_login = false;
+            this.wrong = errors["2"];
           }
           if (key === 4) {
-            this.wrong_password = true
-            this.wrong_login = false
-            this.wrong = errors['4']
+            this.wrong_password = true;
+            this.wrong_login = false;
+            this.wrong = errors["4"];
           }
         });
       } else {
         this.$store.dispatch("signIn", response);
         this.$router.push("/");
       }
-    }
-  }
+    },
+  },
 };
 </script>
