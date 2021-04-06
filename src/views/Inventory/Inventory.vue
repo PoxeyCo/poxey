@@ -30,13 +30,13 @@
       <div class="inventory__listOfMatters__header">
         <div class="inventory__listOfMatters__header__name">Инвентарь</div>
         <div class="inventory__listOfMatters__header__search">
-          <input type="text" placeholder="Поиск предмета..." />
+          <input type="text" v-model="filterItem" placeholder="Поиск предмета..." />
           <img src="../../assets/images/inventory/search.svg" alt="" />
         </div>
       </div>
       <div class="inventory__listOfMatters__main">
         <div class="inventory__listOfMatters__main__wrap">
-          <div class="inventory__listOfMatters__main__wrap__matter" v-for="item in items" :key="item._id">
+          <div class="inventory__listOfMatters__main__wrap__matter" v-for="item in search" :key="item._id">
             <div class="inventory__listOfMatters__main__wrap__matter__name">
               <p>{{ item.title }}</p>
               <img src="../../assets/images/inventory/cork-hat.png" alt="" />
@@ -47,132 +47,6 @@
               </p>
             </div>
           </div>
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Рваное пончо</p>-->
-<!--              <img src="../../assets/images/inventory/fur-shirt.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>7</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Черные тапочки</p>-->
-<!--              <img src="../../assets/images/inventory/sandal.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>4</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Потертая шлапа</p>-->
-<!--              <img src="../../assets/images/inventory/cork-hat.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Палка</p>-->
-<!--              <img src="../../assets/images/inventory/stick.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Черные тапочки</p>-->
-<!--              <img src="../../assets/images/inventory/sandal.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>4</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Палка</p>-->
-<!--              <img src="../../assets/images/inventory/stick.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Потертая шлапа</p>-->
-<!--              <img src="../../assets/images/inventory/cork-hat.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Потертая шлапа</p>-->
-<!--              <img src="../../assets/images/inventory/cork-hat.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Рваное пончо</p>-->
-<!--              <img src="../../assets/images/inventory/fur-shirt.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>7</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Черные тапочки</p>-->
-<!--              <img src="../../assets/images/inventory/sandal.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>4</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Палка</p>-->
-<!--              <img src="../../assets/images/inventory/stick.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Потертая шлапа</p>-->
-<!--              <img src="../../assets/images/inventory/cork-hat.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Потертая шлапа</p>-->
-<!--              <img src="../../assets/images/inventory/cork-hat.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>10</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="inventory__listOfMatters__main__wrap__matter">-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__name">-->
-<!--              <p>Рваное пончо</p>-->
-<!--              <img src="../../assets/images/inventory/fur-shirt.png" alt="" />-->
-<!--            </div>-->
-<!--            <div class="inventory__listOfMatters__main__wrap__matter__power">-->
-<!--              <p>Броня: <span>7</span></p>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -187,7 +61,14 @@ export default {
   data() {
     return {
       items: [],
+      filterItem: null,
     };
+  },
+  computed: {
+      search() {
+        if(this.filterItem) return this.items.filter(item => item.title.toLowerCase().indexOf(this.filterItem.toLowerCase(), 0) > -1);
+        else return this.items;
+      }
   },
   mounted: function () {
     this.$store.state.character.items.forEach(async (item) => {
