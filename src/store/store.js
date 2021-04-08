@@ -19,6 +19,7 @@ export default new Vuex.Store({
       experience: 0,
     },
     character: {
+      id: "",
       power: 0,
       pokemons: [],
       items: [],
@@ -45,7 +46,7 @@ export default new Vuex.Store({
       cookie.set("user_id", userData._id, "1d");
     },
     setAccountProgress(state, progressData) {
-      console.log(progressData);
+      state.character.id = progressData.character._id;
       state.character.power = progressData.character.power;
       state.character.pokemons = progressData.character.pokemons;
       state.character.items = progressData.character.items;
@@ -89,7 +90,10 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
 
-      await fetch("http://poxey.herokuapp.com/api/v1/characters/", requestCharacters)
+      await fetch(
+        "http://poxey.herokuapp.com/api/v1/characters/",
+        requestCharacters
+      )
         .then((res) => res.json())
         .then((data) => {
           ctx.commit("setAccountProgress", data);

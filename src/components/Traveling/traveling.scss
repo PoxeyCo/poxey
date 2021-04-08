@@ -112,7 +112,12 @@
 
   &-footer {
     text-align: center;
-    margin-top: 58px;
+    margin-top: 38px;
+
+    &__count {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
 
     button {
       width: 232px;
@@ -124,6 +129,12 @@
       border-radius: 10px;
       border: none;
       padding: 10px 0 5px 0;
+      margin-top: 10px;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
 
       &:before {
         content: url("../../assets/images/traveling/rout.svg");

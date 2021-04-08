@@ -22,10 +22,7 @@
         />
         <div class="traveling-wrapper__slider-tape">
           <div class="slider-lenta">
-            <div
-              class="traveling-wrapper__slider-tape__item"
-              @click="selectPokemon"
-            >
+            <div class="traveling-wrapper__slider-tape__item">
               <img
                 src="../../assets/images/traveling/Herdier.png"
                 @click="selectPokemon"
@@ -108,7 +105,10 @@
       </div>
     </div>
     <div class="traveling-footer">
-      <button type="submit">В путь</button>
+      <div class="traveling-footer__count">
+        <p>Выбрано покемонов: {{ selectedPokemons.length }}</p>
+      </div>
+      <button type="submit" :disabled="selectedPokemons.length === 0">В путь</button>
     </div>
   </div>
 </template>
@@ -120,18 +120,23 @@ import slider from "@/utils/travalingSlider";
 export default {
   name: "Traveling",
   data() {
-    return {}
+    return {
+      selectedPokemons: [],
+    };
   },
   methods: {
     selectPokemon(event) {
-      const target = event.target.closest(
-        ".traveling-wrapper__slider-tape__item"
-      );
-      target.classList.add("check");
+      if (this.selectedPokemons.length <= 2) {
+        const target = event.target.closest(
+          ".traveling-wrapper__slider-tape__item"
+        );
+        target.classList.add("check");
+        this.selectedPokemons.push("pokemon");
+      }
     },
   },
   mounted() {
-    slider()
+    slider();
   },
 };
 </script>
