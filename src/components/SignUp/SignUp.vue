@@ -202,7 +202,7 @@ export default {
         };
 
         await fetch(
-          "http://poxey.herokuapp.com/api/v1/characters/",
+          "https://poxey.herokuapp.com/api/v1/characters/",
           requestCharacters
         );
 
@@ -226,7 +226,7 @@ export default {
       };
 
       fetch(
-        "http://poxey.herokuapp.com/api/v1/accounts/register",
+        "https://poxey.herokuapp.com/api/v1/accounts/register",
         requestParams
       )
         .then((res) => res.json())

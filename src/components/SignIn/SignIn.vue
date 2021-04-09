@@ -51,10 +51,7 @@
           </div>
         </div>
         <div class="SignIn__main__formSign__forgetPas">Забыли пароль!</div>
-        <div
-          class="SignIn__main__formSign__btn"
-          @click="authorization"
-        >
+        <div class="SignIn__main__formSign__btn" @click="authorization">
           ВОЙТИ
         </div>
         <p class="SignIn__main__formSign__btnSignUp">
@@ -113,7 +110,7 @@ export default {
         };
 
         fetch(
-          "http://poxey.herokuapp.com/api/v1/accounts/signin",
+          "https://poxey.herokuapp.com/api/v1/accounts/signin",
           requestParams
         )
           .then((res) => res.json())

@@ -86,12 +86,12 @@ export default new Vuex.Store({
         },
       };
 
-      await fetch(`http://poxey.herokuapp.com/api/v1/accounts/${userId}`)
+      await fetch(`https://poxey.herokuapp.com/api/v1/accounts/${userId}`)
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
 
       await fetch(
-        "http://poxey.herokuapp.com/api/v1/characters/",
+        "https://poxey.herokuapp.com/api/v1/characters/",
         requestCharacters
       )
         .then((res) => res.json())
