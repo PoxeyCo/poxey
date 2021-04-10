@@ -7,6 +7,8 @@
         src="../../assets/images/auth/pokemon1.png"
         alt=""
       />
+      <PasswordRecovery  v-if="false"/>
+      <ChangePassword v-if="false"/>
       <div class="SignIn__main__formSign">
         <div class="SignIn__main__formSign__title">Авторизация</div>
         <div
@@ -70,9 +72,15 @@
 </template>
 <script>
 import "./signin.scss";
+import PasswordRecovery from "@/components/PasswordRecovery/PasswordRecovery";
+import ChangePassword from "@/components/ChangePassword/ChangePassword";
 
 export default {
   name: "SignIn",
+  components: {
+    PasswordRecovery,
+    ChangePassword
+  },
   data() {
     return {
       wrong_login: false,
