@@ -78,7 +78,21 @@
           class="inventory__listOfMatters__main__wrap"
           v-if="currentTub === 'pokemons'"
         >
-          <p style="font-weight: bold; font-size: 25px">Тут будут покемоны</p>
+          <div
+            class="inventory__listOfMatters__main__wrap__matter pokemon"
+            v-for="pokemon in pokemons"
+            :key="pokemon._id"
+          >
+            <div class="inventory__listOfMatters__main__wrap__matter__name">
+              <p>{{ pokemon.name }}</p>
+              <img :src="`${ pokemon.sprite }`" alt="" />
+            </div>
+            <div class="inventory__listOfMatters__main__wrap__matter__power">
+              <p>
+                Сила: <span>{{ pokemon.power }}</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,6 +107,7 @@ export default {
   data() {
     return {
       items: [],
+      pokemons: [],
       filterItem: null,
       currentTub: "inventory",
     };
@@ -120,11 +135,19 @@ export default {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.status) {
           data.items.forEach((item) => this.items.push(item));
         }
       });
+
+      await fetch("http://poxey.herokuapp.com/api/v1/pokemons/character?id=60735a5f3826050004ebd254")
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if(data.status) {
+            data.pokemons.forEach(pokemon => this.pokemons.push(pokemon))
+          }
+        })
   },
 };
 </script>
