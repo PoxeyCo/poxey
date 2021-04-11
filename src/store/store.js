@@ -29,6 +29,9 @@ export default new Vuex.Store({
       accessToken: "" || cookie.get("access_token"),
       refreshToken: "" || cookie.get("refresh_token"),
     },
+    changePassword: {
+      step: 0,
+    },
   },
   mutations: {
     setAccountData(state, userData) {
@@ -72,6 +75,9 @@ export default new Vuex.Store({
 
       cookie.remove("user_id");
     },
+    changePas(state, num) {
+      state.changePassword.step = num;
+    }
   },
   actions: {
     signIn(ctx, data) {
