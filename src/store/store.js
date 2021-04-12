@@ -31,6 +31,7 @@ export default new Vuex.Store({
     },
     changePassword: {
       step: 0,
+      email: '',
     },
   },
   mutations: {
@@ -77,7 +78,10 @@ export default new Vuex.Store({
     },
     changePas(state, num) {
       state.changePassword.step = num;
-    }
+    },
+    changePasSaveEmail(state, email) {
+      state.changePassword.email = email;
+    },
   },
   actions: {
     signIn(ctx, data) {

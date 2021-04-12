@@ -61,9 +61,9 @@ export default {
       }
     },
     checkServerResponse(response) {
-      console.log(response)
       if (response.status) {
         this.$store.commit('changePas', 2)
+        this.$store.commit('changePasSaveEmail', this.email)
       }
     }
   }
