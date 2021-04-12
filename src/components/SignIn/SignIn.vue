@@ -7,9 +7,9 @@
         src="../../assets/images/auth/pokemon1.png"
         alt=""
       />
-      <PasswordRecovery v-if="false" />
-      <ChangePassword v-if="false" />
-      <div class="SignIn__main__formSign">
+      <PasswordRecovery  v-if="this.$store.state.changePassword.step == 1"/>
+      <ChangePassword v-if="this.$store.state.changePassword.step == 2"/>
+      <div class="SignIn__main__formSign" v-if="this.$store.state.changePassword.step == 0">
         <div class="SignIn__main__formSign__title">Авторизация</div>
         <div
           class="SignIn__main__formSign__form"

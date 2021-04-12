@@ -20,14 +20,16 @@
             </div>
             <div
                 class="ChangePassword__main__form"
+                v-if="status"
             >
                 <label>Новый пароль</label>
-                <label class="wrong">{{ wrong }}</label>
+                <!-- <label class="wrong">{{ wrong }}</label> -->
                 <div class="ChangePassword__main__form__input">
                     <img src="../../assets/images/auth/lock.svg" alt="" />
                     <input
                         type="password"
                         placeholder="Введите ваш новый пароль"
+                        v-model="pas1"
                     />
                     <img
                         class="ChangePassword__main__form__input__eye"
@@ -40,14 +42,16 @@
             </div>
             <div
                 class="ChangePassword__main__form last-form"
+                v-if="status"
             >
-                <label>Новый пароль</label>
-                <label class="wrong">{{ wrong }}</label>
+                <label>Повторите пароль</label>
+                <!-- <label class="wrong">{{ wrong }}</label> -->
                 <div class="ChangePassword__main__form__input">
                     <img src="../../assets/images/auth/lock.svg" alt="" />
                     <input
                         type="password"
-                        placeholder="Введите ваш новый пароль"
+                        placeholder="Введите пароль еще раз"
+                        v-model="pas2"
                     />
                     <img
                         class="ChangePassword__main__form__input__eye"
@@ -58,7 +62,7 @@
                     />
                 </div>
             </div>
-            <div class="SignIn__main__formSign__btn">
+            <div class="SignIn__main__formSign__btn" v-if="status" @click="updatePassword()"> 
                 Изменить
             </div>
       </div>
@@ -71,7 +75,10 @@ export default {
     name: "ChangePassword",
     data() {
         return {
-            code: ''
+            code: '',
+            status: false,
+            pas1: '',
+            pas2: '',
         }
     },
     methods: {
@@ -119,10 +126,71 @@ export default {
                 this.code += `${list[k].value}`
             }
 
-            // if (this.code.length === 6) {
-            //     this.errors.code.status = true
-            // }
-        }
+            if (this.code.length === 6) {
+                this.recoverCode()
+            }
+        },
+        recoverCode() {
+            if (this.code.length) {
+                const requestBody = {
+                    email: this.$store.state.changePassword.email,
+                    code:  Number(this.code)
+                };
+
+                const requestParams = {
+                    method: "POST",
+                    body: JSON.stringify(requestBody),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                };
+
+                fetch(
+                    "https://poxey.herokuapp.com/api/v1/accounts/recover/code",
+                    requestParams
+                )
+                .then((res) => res.json())
+                .then((data) => {
+                    this.checkServerResponse(data);
+                });
+            }
+        },
+        checkServerResponse(response) {
+            if (response.status) {
+                this.status = true
+                
+            }
+        },
+        updatePassword() {
+            if (this.pas1.length && this.pas1 == this.pas2) {
+                const requestBody = {
+                    email: this.$store.state.changePassword.email,
+                    password: this.pas1
+                };
+
+                const requestParams = {
+                    method: "POST",
+                    body: JSON.stringify(requestBody),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                };
+
+                fetch(
+                    "https://poxey.herokuapp.com/api/v1/accounts/recover/password",
+                    requestParams
+                )
+                .then((res) => res.json())
+                .then((data) => {
+                    this.checkServerResponsePas(data);
+                });
+            }
+        },
+        checkServerResponsePas(response) {
+            if (response.status) {
+                this.$store.commit('changePas', 0)
+            }
+        },
     }
 };
 </script>
