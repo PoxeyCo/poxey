@@ -155,9 +155,24 @@
           margin-bottom: 28px;
 
           &.pokemon {
-            img {
+            height: 300px;
+            justify-content: initial;
+
+            .inventory__listOfMatters__main__wrap__matter__name {
+              height: 200px;
+            }
+
+            .inventory__listOfMatters__main__wrap__matter__power {
+              height: 100px;
+            }
+
+            .pokemon-images {
               width: 100%;
-              height: 100%;
+              height: 152px;
+            }
+
+            .inventory__listOfMatters__main__wrap__matter__power {
+              display: block;
             }
           }
 
@@ -175,6 +190,26 @@
               text-align: center;
 
               color: #FFFFFF;
+            }
+
+            &-block {
+              display: flex;
+              flex-direction: column;
+              
+              .health-block {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .name-image {
+                  width: 20px;
+                  height: 20px;
+                }
+  
+                .health-text {
+                  color: #eb3622;
+                }
+              }
             }
           }
 

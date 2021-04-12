@@ -44,11 +44,19 @@
             Покемоны
           </div>
         </div>
-        <div class="inventory__listOfMatters__header__search">
+        <div v-if="currentTub === 'inventory'" class="inventory__listOfMatters__header__search">
           <input
             type="text"
             v-model="filterItem"
             placeholder="Поиск предмета..."
+          />
+          <img src="../../assets/images/inventory/search.svg" alt="" />
+        </div>
+        <div v-if="currentTub === 'pokemons'" class="inventory__listOfMatters__header__search">
+          <input
+            type="text"
+            v-model="filterPokemons"
+            placeholder="Поиск покемона..."
           />
           <img src="../../assets/images/inventory/search.svg" alt="" />
         </div>
@@ -60,7 +68,7 @@
         >
           <div
             class="inventory__listOfMatters__main__wrap__matter"
-            v-for="item in search"
+            v-for="item in searchInventory"
             :key="item._id"
           >
             <div class="inventory__listOfMatters__main__wrap__matter__name">
@@ -80,16 +88,31 @@
         >
           <div
             class="inventory__listOfMatters__main__wrap__matter pokemon"
-            v-for="pokemon in pokemons"
+            v-for="pokemon in searchPokemons"
             :key="pokemon._id"
           >
             <div class="inventory__listOfMatters__main__wrap__matter__name">
-              <p>{{ pokemon.name }}</p>
-              <img :src="`${ pokemon.sprite }`" alt="" />
+              <div class="inventory__listOfMatters__main__wrap__matter__name-block">
+                <p>{{ pokemon.name }}</p> 
+                <div class="health-block">
+                  <img class="name-image" src="../../assets/images/inventory/heart.svg" alt="health">
+                  <p class="health-text">{{ pokemon.stats.hp }}</p>
+                </div>
+              </div>
+              <img class="pokemon-images" :src="`${ pokemon.sprite }`" alt="" />
             </div>
             <div class="inventory__listOfMatters__main__wrap__matter__power">
               <p>
                 Сила: <span>{{ pokemon.power }}</span>
+              </p>
+              <p>
+                Атака: <span>{{ pokemon.stats.attack }}</span>
+              </p>
+              <p>
+                Скорость: <span>{{ pokemon.stats.speed }}</span>
+              </p>
+              <p>
+                Защита: <span>{{ pokemon.stats.defense }}</span>
               </p>
             </div>
           </div>
@@ -109,11 +132,12 @@ export default {
       items: [],
       pokemons: [],
       filterItem: null,
+      filterPokemons: null,
       currentTub: "inventory",
     };
   },
   computed: {
-    search() {
+    searchInventory() {
       if (this.filterItem)
         return this.items.filter(
           (item) =>
@@ -122,11 +146,17 @@ export default {
         );
       else return this.items;
     },
+    searchPokemons() {
+      if(this.filterPokemons) {
+        return this.pokemons.filter(
+          (pokemon) => 
+          pokemon.name.toLowerCase().indexOf(this.filterPokemons.toLowerCase(), 0) > -1);
+      } else return this.pokemons;
+    }
   },
   methods: {
     selectTub(tub) {
-      if (tub === "inventory") this.currentTub = "inventory";
-      else this.currentTub = "pokemons";
+      this.currentTub = tub;
     },
   },
   async mounted() {
@@ -140,7 +170,7 @@ export default {
         }
       });
 
-      await fetch("http://poxey.herokuapp.com/api/v1/pokemons/character?id=60735a5f3826050004ebd254")
+      await fetch(`http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`)
         .then(res => res.json())
         .then(data => {
           console.log(data)
