@@ -7,8 +7,8 @@
         src="../../assets/images/auth/pokemon1.png"
         alt=""
       />
-      <PasswordRecovery  v-if="false"/>
-      <ChangePassword v-if="false"/>
+      <PasswordRecovery v-if="false" />
+      <ChangePassword v-if="false" />
       <div class="SignIn__main__formSign">
         <div class="SignIn__main__formSign__title">Авторизация</div>
         <div
@@ -79,7 +79,7 @@ export default {
   name: "SignIn",
   components: {
     PasswordRecovery,
-    ChangePassword
+    ChangePassword,
   },
   data() {
     return {

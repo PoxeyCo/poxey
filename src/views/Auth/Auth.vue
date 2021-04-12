@@ -18,7 +18,7 @@ export default {
   computed: {
     component() {
       return this.$route.meta.component;
-    }
-  }
+    },
+  },
 };
 </script>
