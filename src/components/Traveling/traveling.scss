@@ -83,6 +83,11 @@
 
         &__item {
           cursor: pointer;
+          
+          img {
+            width: 215px;
+            height: 215px;
+          }
 
           &.check {
             transition: .4s all;

@@ -22,65 +22,13 @@
         />
         <div class="traveling-wrapper__slider-tape">
           <div class="slider-lenta">
-            <div class="traveling-wrapper__slider-tape__item">
+            <div 
+              v-for="pokemon in pokemons" 
+              :key="pokemon._id" 
+              class="traveling-wrapper__slider-tape__item"
+            >
               <img
-                src="../../assets/images/traveling/Herdier.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Gengar.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Herdier.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Gengar.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Herdier.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Gengar.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Gengar.png"
-                @click="selectPokemon"
-                alt=""
-              />
-              <p class="check-text">Выбран</p>
-            </div>
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Herdier.png"
+                :src="`${pokemon.sprite}`"
                 @click="selectPokemon"
                 alt=""
               />
@@ -108,7 +56,9 @@
       <div class="traveling-footer__count">
         <p>Выбрано покемонов: {{ selectedPokemons.length }}</p>
       </div>
-      <button type="submit" :disabled="selectedPokemons.length === 0">В путь</button>
+      <button type="submit" :disabled="selectedPokemons.length === 0">
+        В путь
+      </button>
     </div>
   </div>
 </template>
@@ -121,6 +71,7 @@ export default {
   name: "Traveling",
   data() {
     return {
+      pokemons: [],
       selectedPokemons: [],
     };
   },
@@ -135,8 +86,20 @@ export default {
       }
     },
   },
-  mounted() {
-    slider();
+  async mounted() {
+    await fetch(
+      `http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status) {
+          data.pokemons.forEach((item) => {
+            this.pokemons.push(item);
+            slider();
+          })
+        }
+      });
   },
 };
 </script>
