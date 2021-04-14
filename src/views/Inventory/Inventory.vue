@@ -186,7 +186,7 @@ export default {
       });
 
     await fetch(
-      `http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`
+      `https://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`
     )
       .then((res) => res.json())
       .then((data) => {
