@@ -22,7 +22,6 @@
         />
         <div class="traveling-wrapper__slider-tape">
           <div class="slider-lenta">
-<<<<<<< HEAD
             <div 
               v-for="pokemon in pokemons" 
               :key="pokemon._id" 
@@ -30,11 +29,6 @@
             >
               <img
                 :src="`${pokemon.sprite}`"
-=======
-            <div class="traveling-wrapper__slider-tape__item">
-              <img
-                src="../../assets/images/traveling/Herdier.png"
->>>>>>> db68f27ecf5eba11b0c3e4af245b86a58a01c20b
                 @click="selectPokemon"
                 alt=""
               />
@@ -93,11 +87,6 @@ export default {
     },
   },
   async mounted() {
-<<<<<<< HEAD
-=======
-    slider();
-
->>>>>>> db68f27ecf5eba11b0c3e4af245b86a58a01c20b
     await fetch(
       `http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`
     )
@@ -105,14 +94,10 @@ export default {
       .then((data) => {
         console.log(data);
         if (data.status) {
-<<<<<<< HEAD
           data.pokemons.forEach((item) => {
             this.pokemons.push(item);
             slider();
           })
-=======
-          data.pokemons.forEach((item) => this.pokemons.push(item));
->>>>>>> db68f27ecf5eba11b0c3e4af245b86a58a01c20b
         }
       });
   },
