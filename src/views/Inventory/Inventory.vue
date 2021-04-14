@@ -44,10 +44,7 @@
             Покемоны
           </div>
         </div>
-        <div
-          v-if="currentTub === 'inventory'"
-          class="inventory__listOfMatters__header__search"
-        >
+        <div v-if="currentTub === 'inventory'" class="inventory__listOfMatters__header__search">
           <input
             type="text"
             v-model="filterItem"
@@ -55,10 +52,7 @@
           />
           <img src="../../assets/images/inventory/search.svg" alt="" />
         </div>
-        <div
-          v-if="currentTub === 'pokemons'"
-          class="inventory__listOfMatters__header__search"
-        >
+        <div v-if="currentTub === 'pokemons'" class="inventory__listOfMatters__header__search">
           <input
             type="text"
             v-model="filterPokemons"
@@ -98,20 +92,14 @@
             :key="pokemon._id"
           >
             <div class="inventory__listOfMatters__main__wrap__matter__name">
-              <div
-                class="inventory__listOfMatters__main__wrap__matter__name-block"
-              >
-                <p>{{ pokemon.name }}</p>
+              <div class="inventory__listOfMatters__main__wrap__matter__name-block">
+                <p>{{ pokemon.name }}</p> 
                 <div class="health-block">
-                  <img
-                    class="name-image"
-                    src="../../assets/images/inventory/heart.svg"
-                    alt="health"
-                  />
+                  <img class="name-image" src="../../assets/images/inventory/heart.svg" alt="health">
                   <p class="health-text">{{ pokemon.stats.hp }}</p>
                 </div>
               </div>
-              <img class="pokemon-images" :src="`${pokemon.sprite}`" alt="" />
+              <img class="pokemon-images" :src="`${ pokemon.sprite }`" alt="" />
             </div>
             <div class="inventory__listOfMatters__main__wrap__matter__power">
               <p>
@@ -159,15 +147,12 @@ export default {
       else return this.items;
     },
     searchPokemons() {
-      if (this.filterPokemons) {
+      if(this.filterPokemons) {
         return this.pokemons.filter(
-          (pokemon) =>
-            pokemon.name
-              .toLowerCase()
-              .indexOf(this.filterPokemons.toLowerCase(), 0) > -1
-        );
+          (pokemon) => 
+          pokemon.name.toLowerCase().indexOf(this.filterPokemons.toLowerCase(), 0) > -1);
       } else return this.pokemons;
-    },
+    }
   },
   methods: {
     selectTub(tub) {
@@ -185,16 +170,14 @@ export default {
         }
       });
 
-    await fetch(
-      `http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.status) {
-          data.pokemons.forEach((pokemon) => this.pokemons.push(pokemon));
-        }
-      });
+      await fetch(`http://poxey.herokuapp.com/api/v1/pokemons/character?id=${this.$store.state.character.id}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if(data.status) {
+            data.pokemons.forEach(pokemon => this.pokemons.push(pokemon))
+          }
+        })
   },
 };
 </script>

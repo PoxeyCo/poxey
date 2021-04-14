@@ -52,7 +52,7 @@
             />
           </div>
         </div>
-        <div class="SignIn__main__formSign__forgetPas" @click="$store.commit('changePas', 1)">Забыли пароль!</div>
+        <div class="SignIn__main__formSign__forgetPas">Забыли пароль!</div>
         <div class="SignIn__main__formSign__btn" @click="authorization">
           ВОЙТИ
         </div>
