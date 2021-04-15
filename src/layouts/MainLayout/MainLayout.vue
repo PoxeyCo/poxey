@@ -118,6 +118,15 @@ export default {
   mounted() {
     const navLinks = document.querySelectorAll(".nav-links__item a");
     const userDropMenuLinks = document.querySelectorAll(".user__dropDown-item");
+    const levelProgress = document.querySelector(".progress");
+
+    const exp =
+      Number(levelProgress.clientWidth) /
+      this.$store.state.account.expToNextLevel;
+    const userExp = exp * this.$store.state.account.experience;
+    console.log(userExp);
+
+    levelProgress.style.width = userExp + "px";
 
     userDropMenuLinks.forEach((link) => {
       link.addEventListener("click", () => (this.openUserDropDown = false));
