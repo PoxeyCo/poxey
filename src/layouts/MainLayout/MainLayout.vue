@@ -124,7 +124,6 @@ export default {
       Number(levelProgress.clientWidth) /
       this.$store.state.account.expToNextLevel;
     const userExp = exp * this.$store.state.account.experience;
-    console.log(userExp);
 
     levelProgress.style.width = userExp + "px";
 

@@ -22,7 +22,7 @@
           </p>
         </div>
         <div class="traveling__st-level">
-          <p>Уровень: {{ $store.state.character.lastLevelCompleted + 1 }}ур.</p>
+          <p>Уровень: {{ $store.state.character.lastLevelCompleted + 1 }}</p>
         </div>
       </div>
       <div
@@ -71,8 +71,8 @@
       </div>
       <div class="traveling-wrapper" v-if="isAdventure && !isSuccessful.length">
         <p>Вы уже в преключении</p>
-        <p>Время начала: {{ adventures.startTime }}</p>
-        <p>Время окончания: {{ adventures.endTime }}</p>
+        <p>Время начала: {{ new Date(Date.parse(adventures.startTime)) }}</p>
+        <p>Время окончания: {{ new Date(Date.parse(adventures.endTime)) }}</p>
       </div>
       <div class="traveling-wrapper" v-if="isSuccessful.length">
         <p>Приключение закончилось!</p>
@@ -100,7 +100,7 @@
 
 <script>
 import "./traveling.scss";
-import slider from "@/utils/travalingSlider";
+// import slider from "@/utils/travalingSlider";
 
 export default {
   name: "Traveling",
@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     selectPokemon(event, id) {
-      console.log(event, id);
       if (
         this.selectedPokemonsId.filter((selectedId) => selectedId === id)
           .length === 0
@@ -137,7 +136,6 @@ export default {
       const requestBody = {
         levelId: this.levelId,
       };
-      console.log(this.$store.state.tokens.accessToken);
       const requestParams = {
         method: "POST",
         headers: {
@@ -153,8 +151,9 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           this.isAdventure = true;
+          this.adventures = data.adventure;
         });
     },
 
@@ -175,7 +174,7 @@ export default {
           if (data.status) {
             this.isAdventure = false;
             this.isSuccessful = "";
-            this.$store.dispatch("authorization");
+            this.$store.dispatch("authorization", this.$store.state.account.id);
           }
         });
     },
@@ -214,8 +213,7 @@ export default {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("OK");
-        console.log(data);
+        // console.log(data);
         if (data.status && data.adventure != null) {
           if (!data.adventure.isCompleted) {
             this.isAdventure = true;
@@ -230,7 +228,7 @@ export default {
       });
 
     this.isLoaded = true;
-    slider();
+    // slider();
   },
 };
 </script>
