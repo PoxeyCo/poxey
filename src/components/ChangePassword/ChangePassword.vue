@@ -17,6 +17,7 @@
                     <p>-</p>
                     <input type="number" @focus="focusCode(5)" @input="enterCode(5)">
                 </div>
+                <label :class="{wrong: wrongCode}">dhrfh</label>
             </div>
             <div
                 class="ChangePassword__main__form"
@@ -79,6 +80,7 @@ export default {
             status: false,
             pas1: '',
             pas2: '',
+            wrongCode: '',
         }
     },
     methods: {
@@ -158,11 +160,11 @@ export default {
         checkServerResponse(response) {
             if (response.status) {
                 this.status = true
-                
+                console.log(response)
             }
         },
         updatePassword() {
-            if (this.pas1.length && this.pas1 == this.pas2) {
+            if (this.pas1.length>6 && this.pas1 == this.pas2 && this.pas1.length<18 && this.pas1.matches("A-Z")) {
                 const requestBody = {
                     email: this.$store.state.changePassword.email,
                     password: this.pas1

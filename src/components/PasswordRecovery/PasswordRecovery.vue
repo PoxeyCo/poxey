@@ -6,7 +6,7 @@
               class="PasswordRecovery__main__form"
             >
                 <label>Ваш E-mail</label>
-                <!-- <label class="wrong">{{ wrong }}</label> -->
+                <label class="wrong" :class="{ ok: wrong }">{{ wrong }}</label>
                 <div class="PasswordRecovery__main__form__input">
                     <img src="../../assets/images/auth/email.svg" alt="" />
                     <input
@@ -31,7 +31,8 @@ export default {
   name: "PasswordRecovery",
   data() {
     return {
-      email: ''
+      email: '',
+      wrong: '',
     }
   },
   methods: {
@@ -64,6 +65,15 @@ export default {
       if (response.status) {
         this.$store.commit('changePas', 2)
         this.$store.commit('changePasSaveEmail', this.email)
+      } else {
+        
+        if (response.errors[0] == 2) {
+          this.wrong = 'Пользователя с такой почтой не существует'
+          console.log(this.wrong)
+        } else if (response.errors[0] == 1) {
+          this.wrong = 'Неверная почта'
+          console.log(this.wrong)
+        }
       }
     }
   }
