@@ -66,13 +66,10 @@ export default {
         this.$store.commit('changePas', 2)
         this.$store.commit('changePasSaveEmail', this.email)
       } else {
-        
         if (response.errors[0] == 2) {
           this.wrong = 'Пользователя с такой почтой не существует'
-          console.log(this.wrong)
         } else if (response.errors[0] == 1) {
           this.wrong = 'Неверная почта'
-          console.log(this.wrong)
         }
       }
     },
