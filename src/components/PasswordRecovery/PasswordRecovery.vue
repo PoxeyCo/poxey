@@ -1,26 +1,26 @@
 <template>
   <div class="PasswordRecovery">
       <div class="PasswordRecovery__main">
-            <div class="PasswordRecovery__main__title">Восстановление</div>
-            <div
-              class="PasswordRecovery__main__form"
-            >
-                <label>Ваш E-mail</label>
-                <label class="wrong" :class="{ ok: wrong }">{{ wrong }}</label>
-                <div class="PasswordRecovery__main__form__input">
-                    <img src="../../assets/images/auth/email.svg" alt="" />
-                    <input
-                    v-model="email"
-                    type="email"
-                    placeholder="Введите вашу почту"
-                    />
-                </div>
+        <div class="PasswordRecovery__main__title">Восстановление</div>
+        <div
+          class="PasswordRecovery__main__form"
+        >
+            <label>Ваш E-mail</label>
+            <label class="wrong" :class="{ ok: wrong }">{{ wrong }}</label>
+            <div class="PasswordRecovery__main__form__input">
+                <img src="../../assets/images/auth/email.svg" alt="" />
+                <input
+                v-model="email"
+                type="email"
+                placeholder="Введите вашу почту"
+                />
             </div>
-            <div class="PasswordRecovery__main__btn" @click="recovery()">Получить код</div>
-            <p class="PasswordRecovery__main__btnSignIn">
-                Я вспомнил пароль!
-                <a @click="$store.commit('changePas', 0)">Войти!</a>
-            </p>
+        </div>
+        <div class="PasswordRecovery__main__btn" @click="recovery()">Получить код</div>
+        <p class="PasswordRecovery__main__btnSignIn">
+            Я вспомнил пароль!
+            <a @click="$store.commit('changePas', 0)">Войти!</a>
+        </p>
       </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
     recovery() {
       if (this.email.length) {
         const requestBody = {
-          email: this.email
+          email: this.email,
         };
 
         const requestParams = {
@@ -75,7 +75,7 @@ export default {
           console.log(this.wrong)
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>

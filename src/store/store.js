@@ -24,6 +24,7 @@ export default new Vuex.Store({
       pokemons: [],
       items: [],
       selectedItems: {},
+      lastLevelCompleted: 0,
     },
     tokens: {
       accessToken: "" || cookie.get("access_token"),
@@ -31,7 +32,7 @@ export default new Vuex.Store({
     },
     changePassword: {
       step: 0,
-      email: '',
+      email: "",
     },
   },
   mutations: {
@@ -55,6 +56,8 @@ export default new Vuex.Store({
       state.character.pokemons = progressData.character.pokemons;
       state.character.items = progressData.character.items;
       state.character.selectedItems = progressData.character.selectedItems;
+      state.character.lastLevelCompleted =
+        progressData.character.lastLevelCompleted;
     },
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;

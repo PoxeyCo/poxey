@@ -7,9 +7,12 @@
         src="../../assets/images/auth/pokemon1.png"
         alt=""
       />
-      <PasswordRecovery  v-if="this.$store.state.changePassword.step == 1"/>
-      <ChangePassword v-if="this.$store.state.changePassword.step == 2"/>
-      <div class="SignIn__main__formSign" v-if="this.$store.state.changePassword.step == 0">
+      <PasswordRecovery v-if="this.$store.state.changePassword.step == 1" />
+      <ChangePassword v-if="this.$store.state.changePassword.step == 2" />
+      <div
+        class="SignIn__main__formSign"
+        v-if="this.$store.state.changePassword.step == 0"
+      >
         <div class="SignIn__main__formSign__title">Авторизация</div>
         <div
           class="SignIn__main__formSign__form"
@@ -52,7 +55,12 @@
             />
           </div>
         </div>
-        <div class="SignIn__main__formSign__forgetPas" @click="$store.commit('changePas', 1)">Забыли пароль!</div>
+        <div
+          class="SignIn__main__formSign__forgetPas"
+          @click="$store.commit('changePas', 1)"
+        >
+          Забыли пароль!
+        </div>
         <div class="SignIn__main__formSign__btn" @click="authorization">
           ВОЙТИ
         </div>
