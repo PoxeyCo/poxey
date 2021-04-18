@@ -100,6 +100,7 @@
 
 <script>
 import "./traveling.scss";
+import cookie from "vue-cookies";
 // import slider from "@/utils/travalingSlider";
 
 export default {
@@ -174,7 +175,8 @@ export default {
           if (data.status) {
             this.isAdventure = false;
             this.isSuccessful = "";
-            this.$store.dispatch("authorization", this.$store.state.account.id);
+            const userId = cookie.get("user_id") || this.$store.state.account.id;
+            this.$store.dispatch("authorization", userId);
           }
         });
     },
