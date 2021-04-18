@@ -5,63 +5,66 @@
       <div class="ChangePassword__main__code">
         <p>Введите код восстановления</p>
         <div class="ChangePassword__main__code__form">
-          <input type="number" @focus="focusCode(0)" @input="enterCode(0)" />
+          <input type="number" @focus="focusCode(0)" @input="enterCode(0)">
           <p>-</p>
-          <input type="number" @focus="focusCode(1)" @input="enterCode(1)" />
+          <input type="number" @focus="focusCode(1)" @input="enterCode(1)">
           <p>-</p>
-          <input type="number" @focus="focusCode(2)" @input="enterCode(2)" />
+          <input type="number" @focus="focusCode(2)" @input="enterCode(2)">
           <p>-</p>
-          <input type="number" @focus="focusCode(3)" @input="enterCode(3)" />
+          <input type="number" @focus="focusCode(3)" @input="enterCode(3)">
           <p>-</p>
-          <input type="number" @focus="focusCode(4)" @input="enterCode(4)" />
+          <input type="number" @focus="focusCode(4)" @input="enterCode(4)">
           <p>-</p>
-          <input type="number" @focus="focusCode(5)" @input="enterCode(5)" />
+          <input type="number" @focus="focusCode(5)" @input="enterCode(5)">
         </div>
+        <label :class="{wrong: wrongCode.length}">{{wrongCode}}</label>
       </div>
-      <div class="ChangePassword__main__form" v-if="status">
+      <div
+          class="ChangePassword__main__form" :class="{wrong: wrongPas.length}"
+          v-if="status"
+      >
         <label>Новый пароль</label>
-        <!-- <label class="wrong">{{ wrong }}</label> -->
+        <label class="wrong">{{ wrongPas }}</label>
         <div class="ChangePassword__main__form__input">
           <img src="../../assets/images/auth/lock.svg" alt="" />
           <input
-            type="password"
-            placeholder="Введите ваш новый пароль"
-            v-model="pas1"
+              type="password"
+              placeholder="Введите ваш новый пароль"
+              v-model="pas1"
           />
           <img
-            class="ChangePassword__main__form__input__eye"
-            @click="eye('eye-pas1')"
-            id="eye-pas1"
-            src="../../assets/images/auth/close-eye.svg"
-            alt=""
+              class="ChangePassword__main__form__input__eye"
+              @click="eye('eye-pas1')"
+              id="eye-pas1"
+              src="../../assets/images/auth/close-eye.svg"
+              alt=""
           />
         </div>
       </div>
-      <div class="ChangePassword__main__form last-form" v-if="status">
+      <div
+          class="ChangePassword__main__form last-form"
+          v-if="status"
+      >
         <label>Повторите пароль</label>
         <!-- <label class="wrong">{{ wrong }}</label> -->
         <div class="ChangePassword__main__form__input">
           <img src="../../assets/images/auth/lock.svg" alt="" />
           <input
-            type="password"
-            placeholder="Введите пароль еще раз"
-            v-model="pas2"
+              type="password"
+              placeholder="Введите пароль еще раз"
+              v-model="pas2"
           />
           <img
-            class="ChangePassword__main__form__input__eye"
-            @click="eye('eye-pas2')"
-            id="eye-pas2"
-            src="../../assets/images/auth/close-eye.svg"
-            alt=""
+              class="ChangePassword__main__form__input__eye"
+              @click="eye('eye-pas2')"
+              id="eye-pas2"
+              src="../../assets/images/auth/close-eye.svg"
+              alt=""
           />
         </div>
       </div>
-      <div
-        class="SignIn__main__formSign__btn"
-        v-if="status"
-        @click="updatePassword()"
-      >
-        Изменить
+      <div class="SignIn__main__formSign__btn" v-if="status" @click="updatePassword()"> 
+          Изменить
       </div>
     </div>
   </div>
@@ -77,6 +80,8 @@ export default {
       status: false,
       pas1: "",
       pas2: "",
+      wrongCode: '',
+      wrongPas: '',
     };
   },
   methods: {
@@ -148,48 +153,72 @@ export default {
         };
 
         fetch(
-          "https://poxey.herokuapp.com/api/v1/accounts/recover/code",
-          requestParams
+            "https://poxey.herokuapp.com/api/v1/accounts/recover/code",
+            requestParams
         )
-          .then((res) => res.json())
-          .then((data) => {
+        .then((res) => res.json())
+        .then((data) => {
             this.checkServerResponse(data);
-          });
-      }
-    },
-    checkServerResponse(response) {
-      if (response.status) {
-        this.status = true;
+        });
       }
     },
     updatePassword() {
-      if (this.pas1.length && this.pas1 == this.pas2) {
+      if (this.pas1.length>=6 && this.pas1 == this.pas2 && this.pas1.length<=18 && /[A-Z]/.test(this.pas1)) {
         const requestBody = {
-          email: this.$store.state.changePassword.email,
-          password: this.pas1,
+            email: this.$store.state.changePassword.email,
+            password: this.pas1
         };
-
         const requestParams = {
-          method: "POST",
-          body: JSON.stringify(requestBody),
-          headers: {
+            method: "POST",
+            body: JSON.stringify(requestBody),
+            headers: {
             "Content-Type": "application/json",
-          },
+            },
         };
 
         fetch(
           "https://poxey.herokuapp.com/api/v1/accounts/recover/password",
           requestParams
         )
-          .then((res) => res.json())
-          .then((data) => {
+        .then((res) => res.json())
+        .then((data) => {
             this.checkServerResponsePas(data);
-          });
+        });
+      } else {
+        this.wrongPas = 'Пароль не прошел валидацию'
+      }
+    },
+    checkServerResponse(response) {
+      console.log(response)
+      if (response.status) {
+        this.status = true;
+        this.wrongCode = ''
+      } else {
+        this.status = false
+        if (response.errors[0]==1) {
+          this.wrongCode = 'Вы не отправили почту'
+        } else if (response.errors[0]==2) {
+          this.wrongCode = 'Не отправлен код или код НЕ цифра'
+        } else if (response.errors[0]==3) {
+          this.wrongCode = 'Процесс восстановления не начат'
+        } else if (response.errors[0]==4) {
+          this.wrongCode = 'Неверный код'
+        }
       }
     },
     checkServerResponsePas(response) {
       if (response.status) {
         this.$store.commit("changePas", 0);
+      } else {
+        if (response.errors[0]==1) {
+          this.wrongPas = 'Вы не отправили почту'
+        } else if (response.errors[0]==2) {
+          this.wrongPas = 'Процесс восстановления не начат'
+        } else if (response.errors[0]==3) {
+          this.wrongPas = 'Код не подтвержден'
+        } else if (response.errors[0]==4) {
+          this.wrongPas = 'Пароль не прошел валидацию'
+        }
       }
     },
   },

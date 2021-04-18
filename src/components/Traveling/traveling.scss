@@ -46,6 +46,43 @@
   }
 
   &-wrapper {
+
+    &.start-adv, &.end-adv {
+      padding: 0 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &.start-adv {
+      height: 400px;
+    }
+
+    & .start-adv {
+
+      &__title {
+        color: rgb(253, 237, 0);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      &__content {
+        font-size: 1.1rem;
+        line-height: 20px;
+
+        .white {
+          color: #fff;
+        }
+      }
+    }
+
+    &.end-adv {
+
+    }
+
     margin-top: 28px;
 
     .slider-lenta {

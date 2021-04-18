@@ -69,12 +69,13 @@
           />
         </div>
       </div>
-      <div class="traveling-wrapper" v-if="isAdventure && !isSuccessful.length">
-        <p>Вы уже в преключении</p>
-        <p>Время начала: {{ new Date(Date.parse(adventures.startTime)) }}</p>
-        <p>Время окончания: {{ new Date(Date.parse(adventures.endTime)) }}</p>
+      <div class="traveling-wrapper start-adv" v-if="isAdventure && !isSuccessful.length">
+        <p class="start-adv__title">Вы уже в преключении</p>
+        <p class="start-adv__content"><span class="white">Время начала:</span> {{ new Date(Date.parse(adventures.startTime)) }}</p>
+        <p class="start-adv__content"><span class="white">Время окончания:</span> {{ new Date(Date.parse(adventures.endTime)) }}</p>
+        <img src="../../assets/images/traveling/loading.gif" alt="loader">
       </div>
-      <div class="traveling-wrapper" v-if="isSuccessful.length">
+      <div class="traveling-wrapper end-adv" v-if="isSuccessful.length">
         <p>Приключение закончилось!</p>
         <p>Рузультат: {{ this.isSuccessful }}</p>
         <p>Выпавшие предметы:</p>
