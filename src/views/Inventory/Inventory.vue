@@ -74,8 +74,8 @@
         >
           <div
             class="inventory__listOfMatters__main__wrap__matter"
-            v-for="item in searchInventory"
-            :key="item._id"
+            v-for="(item, index) in searchInventory"
+            :key="index"
           >
             <div class="inventory__listOfMatters__main__wrap__matter__name">
               <p>{{ item.title }}</p>
@@ -181,7 +181,9 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         if (data.status) {
-          data.items.forEach((item) => this.items.push(item));
+          data.items.forEach((item) => {
+            this.items.push(item);
+          });
         }
       });
 

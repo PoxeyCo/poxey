@@ -5,7 +5,9 @@
     </div>
     <div class="traveling-block" v-else>
       <div class="traveling__header">
-        <h1 v-if="!isAdventure && isSuccessful.length === 0">Отправиться в приключение</h1>
+        <h1 v-if="!isAdventure && isSuccessful.length === 0">
+          Отправиться в приключение
+        </h1>
         <h1 v-if="isAdventure">Приключение началось</h1>
         <h1 v-if="isSuccessful.length">Приключение закончилось</h1>
       </div>
@@ -69,16 +71,50 @@
           />
         </div>
       </div>
-      <div class="traveling-wrapper start-adv" v-if="isAdventure && !isSuccessful.length">
+      <div
+        class="traveling-wrapper start-adv"
+        v-if="isAdventure && !isSuccessful.length"
+      >
         <p class="start-adv__title">Вы уже в преключении</p>
-        <p class="start-adv__content"><span class="white">Время начала:</span> {{ new Date(Date.parse(adventures.startTime)) }}</p>
-        <p class="start-adv__content"><span class="white">Время окончания:</span> {{ new Date(Date.parse(adventures.endTime)) }}</p>
-        <img src="../../assets/images/traveling/loading.gif" alt="loader">
+        <p class="start-adv__content">
+          <span class="white">Время начала:</span>
+          {{ new Date(Date.parse(adventures.startTime)) }}
+        </p>
+        <p class="start-adv__content">
+          <span class="white">Время окончания:</span>
+          {{ new Date(Date.parse(adventures.endTime)) }}
+        </p>
+        <img src="../../assets/images/traveling/loading.gif" alt="loader" />
       </div>
       <div class="traveling-wrapper end-adv" v-if="isSuccessful.length">
-        <p>Приключение закончилось!</p>
-        <p>Рузультат: {{ this.isSuccessful }}</p>
-        <p>Выпавшие предметы:</p>
+        <p class="end-adv__title">Приключение закончилось!</p>
+        <p class="end-adv__res">
+          Результат:
+          <span
+            :class="{
+              green: isSuccessful === 'Успешно',
+              red: isSuccessful === 'Провалено',
+            }"
+          >
+            {{ this.isSuccessful }}
+          </span>
+        </p>
+        <div class="items-adv" v-if="isSuccessful === 'Успешно'">
+          <p class="end-adv__text">Выпавшие предметы:</p>
+          <div class="items-adv__wrapper">
+            <div
+              class="items-adv__wrapper-item"
+              v-for="(item, index) in droppedItems"
+              :key="index"
+            >
+              <p class="items-adv__wrapper-item__title">{{ item.title }}</p>
+              <p>Тут будет картинка</p>
+              <p class="items-adv__wrapper-item__stat">
+                Сила: {{ item.power }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="traveling-footer" v-if="!isAdventure && !isSuccessful.length">
         <div class="traveling-footer__count">
@@ -102,7 +138,6 @@
 <script>
 import "./traveling.scss";
 import cookie from "vue-cookies";
-// import slider from "@/utils/travalingSlider";
 
 export default {
   name: "Traveling",
@@ -113,12 +148,23 @@ export default {
       levelId: 0,
       levelPower: 0,
       pokemons: [],
+      droppedItems: [],
       selectedPokemonsId: [],
       isAdventure: false,
       adventures: {},
     };
   },
   methods: {
+    getDroppedItems() {
+      this.adventures.droppedItems.forEach((item) => {
+        fetch(`https://poxey.herokuapp.com/api/v1/items/${item}`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            this.droppedItems.push(data.item);
+          });
+      });
+    },
     selectPokemon(event, id) {
       if (
         this.selectedPokemonsId.filter((selectedId) => selectedId === id)
@@ -176,7 +222,8 @@ export default {
           if (data.status) {
             this.isAdventure = false;
             this.isSuccessful = "";
-            const userId = cookie.get("user_id") || this.$store.state.account.id;
+            const userId =
+              cookie.get("user_id") || this.$store.state.account.id;
             this.$store.dispatch("authorization", userId);
           }
         });
@@ -188,7 +235,6 @@ export default {
     )
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.status) {
           data.pokemons.forEach((item) => {
             this.pokemons.push(item);
@@ -227,6 +273,8 @@ export default {
               : "Провалено";
           }
           this.adventures = data.adventure;
+          this.getDroppedItems();
+          // console.log(`Минут: ${Math.floor(seconds / 60 / 60)}`);
         }
       });
 

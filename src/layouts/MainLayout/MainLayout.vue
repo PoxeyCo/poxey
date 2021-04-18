@@ -52,7 +52,7 @@
             </p>
             <p class="header-user__block-balance">
               Баланс:
-              <span class="gold">{{ this.$store.state.account.cash }}</span>
+              <span class="gold">{{Math.ceil(this.$store.state.account.cash, 1) }}</span>
             </p>
           </div>
           <div
