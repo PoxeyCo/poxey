@@ -17,6 +17,16 @@
     font-size: 1.25rem;
     font-weight: bold;
     margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  &__sup {
+    .question {
+      max-width: 155px;
+      max-height: 155px;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__count {
@@ -45,6 +55,11 @@
     height: 50px;
     font-size: 1.875rem;
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: 10px;
+
+    &:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+    }
   }
 }

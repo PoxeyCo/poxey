@@ -75,16 +75,10 @@
         class="traveling-wrapper start-adv"
         v-if="isAdventure && !isSuccessful.length"
       >
-        <p class="start-adv__title">Вы уже в преключении</p>
-        <p class="start-adv__content">
-          <span class="white">Время начала:</span>
-          {{ new Date(Date.parse(adventures.startTime)) }}
-        </p>
-        <p class="start-adv__content">
-          <span class="white">Время окончания:</span>
-          {{ new Date(Date.parse(adventures.endTime)) }}
-        </p>
-        <img src="../../assets/images/traveling/loading.gif" alt="loader" />
+        <div class="start-adv__content">
+          <img src="../../assets/images/traveling/loader-static.png" alt="">
+          <span>{{ Timer() }}</span>
+        </div>
       </div>
       <div class="traveling-wrapper end-adv" v-if="isSuccessful.length">
         <p class="end-adv__title">Приключение закончилось!</p>
@@ -152,9 +146,32 @@ export default {
       selectedPokemonsId: [],
       isAdventure: false,
       adventures: {},
+      timer: null,
     };
   },
   methods: {
+    Timer() {
+      if (timeId) {
+        clearInterval(timeId);
+      }
+      this.timer = new Date(this.adventures.endTime) - Date.now();
+      let timeId = setInterval(() => {
+        this.timer -= 1000;
+      }, 1000);
+      if (this.timer >= 0) {
+        let hours = (
+          "0" + String(Math.trunc(this.timer / 1000 / 60 / 60))
+        ).slice(-2);
+        let minutes = (
+          "0" + String(Math.trunc((this.timer / 1000 / 60) % 60))
+        ).slice(-2);
+        let second = (
+          "0" + String(Math.trunc(((this.timer / 1000) % 60) % 60))
+        ).slice(-2);
+        return `${hours}:${minutes}:${second}`;
+      }
+      return "00:00:00";
+    },
     getDroppedItems() {
       this.adventures.droppedItems.forEach((item) => {
         fetch(`https://poxey.herokuapp.com/api/v1/items/${item}`)
@@ -199,7 +216,6 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
           this.isAdventure = true;
           this.adventures = data.adventure;
         });
@@ -218,7 +234,6 @@ export default {
       )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
           if (data.status) {
             this.isAdventure = false;
             this.isSuccessful = "";
@@ -274,7 +289,6 @@ export default {
           }
           this.adventures = data.adventure;
           this.getDroppedItems();
-          // console.log(`Минут: ${Math.floor(seconds / 60 / 60)}`);
         }
       });
 

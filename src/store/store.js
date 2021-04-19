@@ -18,6 +18,14 @@ export default new Vuex.Store({
       expToNextLevel: 0,
       experience: 0,
     },
+    dailyPrize: {
+      isCanTakeReward: false,
+      millisecondsLeft: null,
+      prize: {
+        type: null,
+        value: {},
+      },
+    },
     character: {
       id: "",
       power: 0,
@@ -59,6 +67,12 @@ export default new Vuex.Store({
       state.character.lastLevelCompleted =
         progressData.character.lastLevelCompleted;
     },
+    setDailyPrize(state, data) {
+      state.dailyPrize.isCanTakeReward = data.isCanTakeReward;
+      state.dailyPrize.millisecondsLeft = data.millisecondsLeft;
+      state.dailyPrize.prize.value = data.prize.value;
+      state.dailyPrize.prize.type = data.prize.type;
+    },
     setTokens(state, tokens) {
       state.tokens.accessToken = tokens.access;
       state.tokens.refreshToken = tokens.refresh;
@@ -99,6 +113,12 @@ export default new Vuex.Store({
         },
       };
 
+      // const requestPrize = {
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: `Bearer ${cookie.get("access_token")}`,
+      //   },
+      // };
       await fetch(`https://poxey.herokuapp.com/api/v1/accounts/${userId}`)
         .then((res) => res.json())
         .then((data) => ctx.commit("setAccountData", data.user));
@@ -111,6 +131,10 @@ export default new Vuex.Store({
         .then((data) => {
           ctx.commit("setAccountProgress", data);
         });
+
+      // await fetch("http://poxey.herokuapp.com/api/v1/prizes/next", requestPrize)
+      //   .then((res) => res.json())
+      //   .then((data) => ctx.commit("setDailyPrize", data));
     },
     logout(ctx) {
       ctx.commit("removeTokens");
