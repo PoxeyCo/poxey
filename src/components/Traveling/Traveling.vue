@@ -81,7 +81,6 @@
         </div>
       </div>
       <div class="traveling-wrapper end-adv" v-if="isSuccessful.length">
-        <p class="end-adv__title">Приключение закончилось!</p>
         <p class="end-adv__res">
           Результат:
           <span
@@ -94,20 +93,23 @@
           </span>
         </p>
         <div class="items-adv" v-if="isSuccessful === 'Успешно'">
-          <p class="end-adv__text">Выпавшие предметы:</p>
-          <div class="items-adv__wrapper">
-            <div
-              class="items-adv__wrapper-item"
-              v-for="(item, index) in droppedItems"
-              :key="index"
-            >
-              <p class="items-adv__wrapper-item__title">{{ item.title }}</p>
-              <p>Тут будет картинка</p>
-              <p class="items-adv__wrapper-item__stat">
-                Сила: {{ item.power }}
-              </p>
+          <template v-if="droppedItems.length !== 0">
+            <p class="end-adv__text">Выпавшие предметы:</p>
+            <div class="items-adv__wrapper" :class="{scroll: droppedItems.length >= 3, one: droppedItems.length === 1}">
+              <div
+                class="items-adv__wrapper-item"
+                v-for="(item, index) in droppedItems"
+                :key="index"
+              >
+                <p class="items-adv__wrapper-item__title">{{ item.title }}</p>
+                <p>Тут будет картинка</p>
+                <p class="items-adv__wrapper-item__stat">
+                  Сила: {{ item.power }}
+                </p>
+              </div>
             </div>
-          </div>
+          </template>
+          <p v-else>Увы, ничего не выпало</p>
         </div>
       </div>
       <div class="traveling-footer" v-if="!isAdventure && !isSuccessful.length">

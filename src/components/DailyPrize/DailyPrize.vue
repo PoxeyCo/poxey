@@ -73,7 +73,7 @@ export default {
       return "00:00:00";
     },
     async getPrize() {
-      await fetch("http://poxey.herokuapp.com/api/v1/prizes/", {
+      await fetch("https://poxey.herokuapp.com/api/v1/prizes/", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${this.$store.state.tokens.accessToken}`,
@@ -95,7 +95,7 @@ export default {
         Authorization: `Bearer ${cookie.get("access_token")}`,
       },
     };
-    await fetch("http://poxey.herokuapp.com/api/v1/prizes/next", requestPrize)
+    await fetch("https://poxey.herokuapp.com/api/v1/prizes/next", requestPrize)
       .then((res) => res.json())
       .then((data) => {
         this.isCanTakeReward = data.isCanTakeReward;

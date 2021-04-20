@@ -46,14 +46,36 @@
   }
 
   &-wrapper {
-
     .items-adv {
-      width: 415px;
+      width: 335px;
+
       &__wrapper {
-        height: 100px;
+        margin-top: 20px;
+        height: 200px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        grid-gap: 10px;
+        padding-right: 10px;
+
+        &.one {
+          justify-content: center;
+        }
+
+        &.scroll {
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            background-color: #ffffff;
+            width: 10px;
+            border-radius: 10px;
+          }
+
+          &::-webkit-scrollbar-thumb{
+            background-color: #035625;
+            border-radius: 10px;
+          }
+        }
 
         &-item {
           width: 150px;
@@ -134,10 +156,11 @@
       }
 
       &__res {
-        font-size: 1.25rem;
+        font-size: 2rem;
         font-weight: bold;
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
 
         & .green,  & .red {
           margin: 5px 0 5px 10px;
