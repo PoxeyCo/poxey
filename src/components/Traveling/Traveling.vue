@@ -53,14 +53,6 @@
                 />
                 <p class="check-text">Выбран</p>
               </div>
-              <div class="traveling-wrapper__slider-tape__item">
-                <img
-                  src="../../assets/images/traveling/Gengar.png"
-                  @click="selectPokemon"
-                  alt=""
-                />
-                <p class="check-text">Выбран</p>
-              </div>
             </div>
           </div>
           <img
@@ -134,6 +126,8 @@
 <script>
 import "./traveling.scss";
 import cookie from "vue-cookies";
+
+import slider from "@/utils/travalingSlider";
 
 export default {
   name: "Traveling",
@@ -292,10 +286,9 @@ export default {
           this.adventures = data.adventure;
           this.getDroppedItems();
         }
+        this.isLoaded = true;
       });
-
-    this.isLoaded = true;
-    // slider();
+    if (this.pokemons.length > 1) slider();
   },
 };
 </script>

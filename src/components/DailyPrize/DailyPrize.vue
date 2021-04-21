@@ -9,7 +9,12 @@
     <p class="daily-prize__title" v-else>Награда готова</p>
     <div class="daily-prize__sup">
       <img
-        v-if="this.isCanTakeReward"
+        v-if="this.isCanTakeReward && this.prize.type === 'coins'"
+        src="../../assets/images/dailyPrize/coin.svg"
+        alt="Coin"
+      />
+      <img
+        v-if="this.isCanTakeReward && this.prize.type === 'pokemon'"
         src="../../assets/images/dailyPrize/coin.svg"
         alt="Coin"
       />
@@ -20,7 +25,7 @@
         alt=""
       />
     </div>
-    <p class="daily-prize__count" v-if="this.isCanTakeReward">
+    <p class="daily-prize__count" v-if="this.isCanTakeReward && this.prize.type === 'coins'">
       x{{ this.prize.value.cash }}
     </p>
     <input
@@ -48,6 +53,7 @@ export default {
         type: null,
         value: {},
       },
+      pokemon:{},
     };
   },
   methods: {
@@ -103,6 +109,9 @@ export default {
         this.prize.value = data.prize.value;
         this.prize.type = data.prize.type;
         this.timer = 86400000 - data.millisecondsLeft;
+
+        // if (data.prize.type === "pokemon") {
+        // }
       });
   },
 };

@@ -31,7 +31,7 @@
             {{ $store.state.account.level }} ур.
           </p>
           <div class="header-level__bar">
-            <span class="progress"></span>
+            <span class="progress" :style="progressBarStyle"></span>
           </div>
           <p class="header-level__num to">
             {{ $store.state.account.level + 1 }} ур.
@@ -113,19 +113,32 @@ export default {
   data() {
     return {
       openUserDropDown: false,
+      progressBarStyle: {
+        width: null,
+      },
     };
   },
+  watch: {
+    "progressBarStyle.width": function () {
+      this.updateLevelBar();
+    },
+  },
+  methods: {
+    updateLevelBar() {
+      const levelProgress = document.querySelector(".progress");
+
+      const exp =
+        Number(levelProgress.clientWidth) /
+        this.$store.state.account.expToNextLevel;
+      this.progressBarStyle.width = exp * this.$store.state.account.experience;
+
+      // levelProgress.style.width = userExp + "px";
+    },
+  },
   mounted() {
+    this.updateLevelBar();
     const navLinks = document.querySelectorAll(".nav-links__item a");
     const userDropMenuLinks = document.querySelectorAll(".user__dropDown-item");
-    const levelProgress = document.querySelector(".progress");
-
-    const exp =
-      Number(levelProgress.clientWidth) /
-      this.$store.state.account.expToNextLevel;
-    const userExp = exp * this.$store.state.account.experience;
-
-    levelProgress.style.width = userExp + "px";
 
     userDropMenuLinks.forEach((link) => {
       link.addEventListener("click", () => (this.openUserDropDown = false));
