@@ -119,5 +119,10 @@ export default new Vuex.Store({
       router.push("/auth");
     },
   },
+  getters: {
+    getSelectedItemsId(state) {
+      return state.character.selectedItems;
+    }
+  },
   modules: {},
 });

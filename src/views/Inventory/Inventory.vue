@@ -3,7 +3,11 @@
     <div class="inventory__equipmentItems">
       <div class="inventory__equipmentItems__item">
         <div class="inventory__equipmentItems__item__block">
-          <img src="../../assets/images/inventory/plus.svg" alt="" />
+          <img
+            v-if="!$store.state.character.selectedItems.helmet"
+            src="../../assets/images/inventory/plus.svg"
+            alt=""
+          />
         </div>
         <p>Шлем</p>
       </div>
@@ -15,7 +19,7 @@
       </div>
       <div class="inventory__equipmentItems__item">
         <div class="inventory__equipmentItems__item__block">
-          <img src="../../assets/images/inventory/plus.svg" alt="" />
+          <img  src="../../assets/images/inventory/plus.svg" alt="" />
         </div>
         <p>Ботинки</p>
       </div>
@@ -152,7 +156,7 @@ export default {
     searchInventory() {
       if (this.filterItem)
         return this.items.filter(
-          (item) =>
+            (item) =>
             item.title.toLowerCase().indexOf(this.filterItem.toLowerCase(), 0) >
             -1
         );
@@ -174,7 +178,7 @@ export default {
       this.currentTub = tub;
     },
   },
-  async mounted() {
+  mounted: async function () {
     await fetch(
       `https://poxey.herokuapp.com/api/v1/items/character?id=${this.$store.state.character.id}`
     )

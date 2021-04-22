@@ -68,7 +68,7 @@
         v-if="isAdventure && !isSuccessful.length"
       >
         <div class="start-adv__content">
-          <img src="../../assets/images/traveling/loader-static.png" alt="">
+          <img src="../../assets/images/traveling/loader-static.png" alt="" />
           <span>{{ Timer() }}</span>
         </div>
       </div>
@@ -87,7 +87,13 @@
         <div class="items-adv" v-if="isSuccessful === 'Успешно'">
           <template v-if="droppedItems.length !== 0">
             <p class="end-adv__text">Выпавшие предметы:</p>
-            <div class="items-adv__wrapper" :class="{scroll: droppedItems.length >= 3, one: droppedItems.length === 1}">
+            <div
+              class="items-adv__wrapper"
+              :class="{
+                scroll: droppedItems.length >= 3,
+                one: droppedItems.length === 1,
+              }"
+            >
               <div
                 class="items-adv__wrapper-item"
                 v-for="(item, index) in droppedItems"
@@ -288,7 +294,13 @@ export default {
         }
         this.isLoaded = true;
       });
-    if (this.pokemons.length > 1) slider();
+
+    if (
+      this.pokemons.length > 1 &&
+      this.isSuccessful.length === 0 &&
+      !this.isAdventure
+    )
+      slider();
   },
 };
 </script>

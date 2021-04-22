@@ -9,7 +9,7 @@
     <p class="daily-prize__title" v-else>Награда готова</p>
     <div class="daily-prize__sup">
       <img
-        v-if="this.isCanTakeReward && this.prize.type === 'coins'"
+        v-if="this.isCanTakeReward && this.prize.type === 'stats'"
         src="../../assets/images/dailyPrize/coin.svg"
         alt="Coin"
       />
@@ -18,14 +18,23 @@
         src="../../assets/images/dailyPrize/coin.svg"
         alt="Coin"
       />
+      <div class="daily-prize__sup-item"  v-if="this.isCanTakeReward && this.prize.type === 'item'">
+        <p class="daily-prize__sup-item__title">
+          {{ item.title }}
+        </p>
+        <img src="../../assets/images/inventory/fur-shirt.png" alt="" />
+      </div>
       <img
-        v-else
+        v-if="!this.isCanTakeReward"
         class="question"
         src="../../assets/images/dailyPrize/prize.svg"
         alt=""
       />
     </div>
-    <p class="daily-prize__count" v-if="this.isCanTakeReward && this.prize.type === 'coins'">
+    <p
+      class="daily-prize__count"
+      v-if="this.isCanTakeReward && this.prize.type === 'stats'"
+    >
       x{{ this.prize.value.cash }}
     </p>
     <input
@@ -53,7 +62,8 @@ export default {
         type: null,
         value: {},
       },
-      pokemon:{},
+      pokemon: {},
+      item: {},
     };
   },
   methods: {
@@ -94,7 +104,7 @@ export default {
         });
     },
   },
-  async mounted() {
+  mounted: async function () {
     const requestPrize = {
       method: "GET",
       headers: {
@@ -103,15 +113,20 @@ export default {
     };
     await fetch("https://poxey.herokuapp.com/api/v1/prizes/next", requestPrize)
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         this.isCanTakeReward = data.isCanTakeReward;
         this.millisecondsLeft = data.millisecondsLeft;
         this.prize.value = data.prize.value;
         this.prize.type = data.prize.type;
         this.timer = 86400000 - data.millisecondsLeft;
 
-        // if (data.prize.type === "pokemon") {
-        // }
+        if (data.prize.type === "item") {
+          await fetch(
+            `https://poxey.herokuapp.com/api/v1/items/${data.prize.value.itemId}`
+          )
+            .then((res) => res.json())
+            .then((data) => (this.item = data.item));
+        }
       });
   },
 };
